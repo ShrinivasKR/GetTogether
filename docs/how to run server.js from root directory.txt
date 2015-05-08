@@ -12,6 +12,9 @@ Run Node.js Command Prompt
 cd to meanGetTogether folder
 	cd somepath\meanGetTogether
 Verify the server.js file is there
-	dir
+	On Windows:
+		dir
+	On Linux/ Mac OS X:
+		ls
 Start the Node.js server
 	node server.js
