@@ -1,20 +1,24 @@
-// These instructions apply to Windows 7
+These instructions apply to Windows 7. Mac OS X works with a little modification.
 
 Install Node.js
+	https://nodejs.org/download/
 Install MongoDB
-Run Node.js Command Prompt
+	https://www.mongodb.org/downloads
+Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Search for equivalent on Mac OS X.)
 	Inside Node.js Command Prompt, run
 		npm install express
 		npm install mongoose
 		npm install body-parser
 		npm install method-override
-	// this fixes the errors you get when running node server.js in the root directory meanGetTogether
-cd to meanGetTogether folder
+		// These 4 installs fix the errors that appear when running 'node server.js' in Node.js Command Prompt (Windows), in the root-directory meanGetTogether
+Change directory to meanGetTogether folder
 	cd somepath\meanGetTogether
-Verify the server.js file is there
+Verify the server.js file exists in the current directory
 	On Windows:
 		dir
 	On Linux/ Mac OS X:
-		ls
+		ls | grep server.js
 Start the Node.js server
 	node server.js
+Open a Web browser (such as Firefox, Internet Explorer, Safari, Chrome) to the following URL:
+	http://localhost:8000
