@@ -4,6 +4,7 @@ Install Node.js
 Install MongoDB
 Run Node.js Command Prompt
 	Inside Node.js Command Prompt, run
+		npm install express
 		npm install mongoose
 		npm install body-parser
 		npm install method-override
