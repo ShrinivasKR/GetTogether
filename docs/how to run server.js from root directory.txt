@@ -1,3 +1,5 @@
+// These instructions apply to Windows 7
+
 Install Node.js
 Install MongoDB
 Run Node.js Command Prompt
