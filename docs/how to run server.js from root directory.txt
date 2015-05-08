@@ -1,0 +1,14 @@
+Install Node.js
+Install MongoDB
+Run Node.js Command Prompt
+	Inside Node.js Command Prompt, run
+		npm install mongoose
+		npm install body-parser
+		npm install method-override
+	// this fixes the errors you get when running node server.js in the root directory meanGetTogether
+cd to meanGetTogether folder
+	cd somepath\meanGetTogether
+Verify the server.js file is there
+	dir
+Start the Node.js server
+	node server.js
