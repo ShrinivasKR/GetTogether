@@ -12,7 +12,7 @@ Install MongoDB
 Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Search for equivalent on Mac OS X.)
 	Inside Node.js Command Prompt
 		Go to your project directory (where you cloned the GitHub project)
-		npm install bower
+		npm install -g bower
 		npm install
 		bower install
 		// These 4 installs fix the errors that appear when running 'node server.js' in Node.js Command Prompt (Windows), in the root-directory meanGetTogether
