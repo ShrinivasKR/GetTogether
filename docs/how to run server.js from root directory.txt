@@ -25,6 +25,7 @@ Start the Node.js server
 Open a Web browser (such as Firefox, Internet Explorer, Safari, Chrome) to the following URL:
 	http://localhost:8000
 Run MongoDB
-	C:\Program Files\MongoDB\Server\3.0\bin
-	Run mongod.exe
+	Create folder C:\data\db (if it does not exist)
+	Navigate to C:\Program Files\MongoDB\Server\3.0\bin
+	Run mongod.exe (leave window open)
 	Run mongo.exe
