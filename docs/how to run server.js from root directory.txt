@@ -23,9 +23,8 @@ Verify the server.js file exists in the current directory
 Start the Node.js server
 	node server.js
 Open a Web browser (such as Firefox, Internet Explorer, Safari, Chrome) to the following URL:
-	http://localhost:8000
+	http://localhost:8080
 Run MongoDB
-	Create folder C:\data\db (if it does not exist)
-	Navigate to C:\Program Files\MongoDB\Server\3.0\bin
-	Run mongod.exe (leave window open)
+	C:\Program Files\MongoDB\Server\3.0\bin
+	Run mongod.exe
 	Run mongo.exe
