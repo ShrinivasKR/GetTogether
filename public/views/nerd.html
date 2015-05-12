@@ -2,4 +2,9 @@
 	<h1>Nerds and Proud</h1>
 
 	<p>{{ tagline }}</p>
+
+    <button ng-click="get()">Get Nerds</button>
+    <button ng-click="hide()">Options</button>
+    <input type="text" name="textBox" ng-show="visible">
+    <button ng-click="create()" ng-show="visible">Create</button>
 </div>
