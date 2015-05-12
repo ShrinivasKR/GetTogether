@@ -3,8 +3,9 @@
 
 	<p>{{ tagline }}</p>
 
-    <button ng-click="get()">Get Nerds</button>
+    <button ng-click="getNerdsList()">Get Nerds</button>
     <button ng-click="hide()">Options</button>
     <input type="text" name="textBox" ng-show="visible">
     <button ng-click="create()" ng-show="visible">Create</button>
+    <p>{{ nerdData }}</p>
 </div>

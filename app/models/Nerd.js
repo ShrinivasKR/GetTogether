@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var nerdSchema = new Schema({
-    name: String
+    name: { type: String, default: 'New Nerd' }
 })
 // define our nerd model
 // module.exports allows us to pass this to other files when it is called
