@@ -4,6 +4,8 @@ Install Node.js
 	https://nodejs.org/download/
 Install MongoDB
 	https://www.mongodb.org/downloads
+	Create the folder structure: C:\data\db\
+	MongoDB will look here by default for data
 Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Search for equivalent on Mac OS X.)
 	Inside Node.js Command Prompt, run
 		npm install express
@@ -22,3 +24,7 @@ Start the Node.js server
 	node server.js
 Open a Web browser (such as Firefox, Internet Explorer, Safari, Chrome) to the following URL:
 	http://localhost:8000
+Run MongoDB
+	C:\Program Files\MongoDB\Server\3.0\bin
+	Run mongod.exe
+	Run mongo.exe
