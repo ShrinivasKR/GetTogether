@@ -13,6 +13,7 @@ angular.module('NerdCtrl', []).controller('NerdController', ["$scope","NerdFacto
     {
         nerdFactory.getAllNerds()
             .success(function (nerdList) {
+                $scope.status = "Retrived Nerds:"
                 $scope.nerdData = nerdList;
             })
             .error(function (error) {
@@ -22,6 +23,15 @@ angular.module('NerdCtrl', []).controller('NerdController', ["$scope","NerdFacto
 
     $scope.create = function()
     {
-
+        var newNerd = { name: $scope.textbox.textBoxValue }
+        $scope.status = 'Inserting Nerd: ' + $scope.textbox.textBoxValue;
+        nerdFactory.createNerd(newNerd)
+            .success(function () {
+                $scope.status = 'Inserted Nerd!';
+                $scope.getNerdsList();
+            }).
+            error(function (error) {
+                $scope.status = 'Inserting Nerd: ' + $scope.textbox.textBoxValue + " ---- " + 'Unable to insert nerd: ' + error.message;
+            });
     }
 }]);
