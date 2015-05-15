@@ -21,8 +21,22 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginController'
-    });
+    })
 
+    .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutController'
+    })
+
+    .when('/time', {
+        templateUrl: 'views/time.html',
+        controller: 'TimeController'
+    })
+
+    .when('/place', {
+        templateUrl: 'views/place.html',
+        controller: 'PlaceController'
+    });
     $locationProvider.html5Mode(true);
 
 }]);
