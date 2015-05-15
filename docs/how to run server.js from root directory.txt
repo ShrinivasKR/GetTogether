@@ -23,7 +23,7 @@ Verify the server.js file exists in the current directory
 		dir
 	On Linux/ Mac OS X:
 		ls | grep server.js
-Start the Node.js server
+Start the Node.js server in the root directory meanGetTogether
 	node server.js
 Open a Web browser (such as Firefox, Internet Explorer, Safari, Chrome) to the following URL:
 	http://localhost:8080
