@@ -4,8 +4,6 @@
  * @license MIT
  * v0.8.3
  */
-goog.provide('ng.material.components.input');
-goog.require('ng.material.core');
 (function() {
 
 /**
