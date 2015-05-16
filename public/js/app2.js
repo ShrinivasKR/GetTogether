@@ -1,35 +1,7 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', "ngRoute"]).config(["$routeProvider", function ($routeProvider) {
-    $routeProvider.when("/geek", {
-        templateUrl: "views/geek.html"
-    });
-    $routeProvider.when("/nerd", {
-        templateUrl: "views/nerd.html"
-    });
-    $routeProvider.when("/place", {
-        templateUrl: "views/place.html"
-    });
-    $routeProvider.otherwise({
-        redirectTo: "/geek"
-    });
-        }]);
+var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'appRoutes', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl']);
 
 app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location, $log) {
-    $scope.selectedIndex = 0;
-
-    $scope.$watch('selectedIndex', function (current, old) {
-        switch (current) {
-        case 0:
-            $location.url("/geek");
-            break;
-        case 1:
-            $location.url("/nerd");
-            break;
-        case 2:
-            $location.url("/place");
-            break;
-
-        }
-    });
+    
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
@@ -41,7 +13,8 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog'
     },
         {
             link: '/views/profile.html',
-            title: 'Profile'
+            title: 'Profile',
+            icon: 'person'
 
     }, {
             link: '/views/groups.html',
@@ -62,9 +35,9 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog'
 
     },
         {
-            link: '',
+            link: '/views/event.html',
             title: 'Create Event',
-            icon: 'add'
+            icon: 'event'
     }
   ];
     $scope.admin = [
