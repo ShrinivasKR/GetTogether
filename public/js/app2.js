@@ -12,30 +12,30 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog'
             icon: 'dashboard'
     },
         {
-            link: '/views/profile.html',
+            link: 'views/profile.html',
             title: 'Profile',
             icon: 'person'
 
     }, {
-            link: '/views/groups.html',
+            link: 'views/groups.html',
             title: 'Groups',
             icon: 'group'
     },
         {
-            link: '/views/nerd.html',
+            link: 'views/nerd.html',
             title: 'Nerds',
             icon: 'school'
 
     },
 
         {
-            link: '/views/geek.html',
+            link: 'views/geek.html',
             title: 'Geek',
             icon: 'school'
 
     },
         {
-            link: '/views/event.html',
+            link: 'views/event.html',
             title: 'Create Event',
             icon: 'event'
     }
