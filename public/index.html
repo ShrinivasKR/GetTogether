@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="css/angular-material.css" />
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/app.css" />
     <!-- custom styles -->
 
     <!-- JS -->
-    <script src="js/angular.js"></script> 
+    <script src="js/angular.js"></script>
     <script src="libs/angular-route/angular-route.min.js"></script>
     <script src="js/angular-animate.js"></script>
     <script src="js/angular-aria.js"></script>
@@ -36,8 +36,123 @@
 </head>
 
 <body>
+    <md-toolbar layout="row">
+        <md-button class="menu" aria-label="Settings">
+            <md-icon md-svg-icon="img/menu.svg"></md-icon>
+        </md-button>
+        <h1>GetTogether</h1>
+    </md-toolbar>
+
+
+    <!--
+    <div ng-controller="AppCtrl" layout="column" style="height:500px;">
+  <section layout="row" flex>
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+      </md-toolbar>
+      <md-content layout-padding ng-controller="LeftCtrl">
+        <md-button ng-click="close()" class="md-primary" hide-gt-md>
+          Close Sidenav Left
+        </md-button>
+        <p hide-md show-gt-md>
+          This sidenav is locked open on your device. To go back to the default behavior,
+          narrow your display.
+        </p>
+      </md-content>
+    </md-sidenav>
+
+    <md-content flex layout-padding>
+      <div layout="column" layout-fill layout-align="top center">
+        <p>
+        The left sidenav will 'lock open' on a medium (>=960px wide) device.
+        </p>
+        <p>
+        The right sidenav will focus on a specific child element.
+        </p>
+        <div>
+          <md-button ng-click="toggleLeft()"
+            class="md-primary" hide-gt-md>
+            Toggle left
+          </md-button>
+        </div>
+        <div>
+          <md-button ng-click="toggleRight()"
+            class="md-primary">
+            Toggle right
+          </md-button>
+        </div>
+      </div>
+      <div flex></div>
+    </md-content>
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+      <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Sidenav Right</h1>
+      </md-toolbar>
+      <md-content ng-controller="RightCtrl" layout-padding>
+        <form>
+          <md-input-container>
+            <label for="testInput">Test input</label>
+            <input type="text" id="testInput"
+                   ng-model="data" md-sidenav-focus>
+          </md-input-container>
+        </form>
+        <md-button ng-click="close()" class="md-primary">
+          Close Sidenav Right
+        </md-button>
+      </md-content>
+    </md-sidenav>
+  </section>
+
+</div>
+-->
 
     <div ng-app="sampleApp" ng-controller="NerdController">
+        <div class="tabsdemoDynamicHeight">
+            <md-content class="md-padding">
+                <md-tabs md-dynamic-height="" md-border-bottom="">
+                    <md-tab>
+                        <md-content class="md-padding">
+                            <a href="/nerds">Nerds</a>
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Geeks" onclick="location.href='geeks'">
+                        <md-content class="md-padding">
+                            <a href="#/geeks">View 1</a>
+                        </md-content>
+                    </md-tab>
+                    <md-tab>
+                        <md-content class="md-padding">
+                            <a href="/login">Login</a>
+                        </md-content>
+                    </md-tab>
+                    <md-tab>
+                        <md-content class="md-padding">
+                            <a href="/profile">Profile</a>
+                        </md-content>
+                    </md-tab>
+                    <md-tab>
+                        
+                        <md-content class="md-padding">
+                            <a href="/about">About</a>
+                        </md-content>
+                    </md-tab>
+                    <md-tab>
+                        
+                        <md-content class="md-padding">
+                            <a href="/time">Time</a>
+                        </md-content>
+                    </md-tab>
+                    <md-tab>
+                        <md-content class="md-padding">
+                            <a href="/place">Place</a> 
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+        </div>
+
         <div class="container">
             <!-- HEADER -->
             <nav class="navbar navbar-inverse">
@@ -51,14 +166,16 @@
                     </li>
                     <li><a href="/login">Login</a>
                     </li>
-                     <li><a href="/about">About</a>
+                    <li><a href="/about">About</a>
                     </li>
                     <li><a href="/time">Time</a>
                     </li>
                     <li><a href="/place">Place</a>
                     </li>
                 </ul>
+
             </nav>
+
             <!-- ANGULAR DYNAMIC CONTENT -->
             <div ng-view></div>
         </div>

@@ -1,16 +1,14 @@
-angular.module('NerdCtrl', []).controller('NerdController', ["$scope","NerdFactory", function ($scope, nerdFactory) {
+angular.module('NerdCtrl', []).controller('NerdController', ["$scope", "NerdFactory", function ($scope, nerdFactory) {
 
     $scope.tagline = 'Nothing beats a pocket protector!';
     $scope.visible = false;
     $scope.nerdData = "Get nerds.."
 
-    $scope.hide = function()
-    {
+    $scope.hide = function () {
         $scope.visible = !$scope.visible;
     }
 
-    $scope.getNerdsList = function ()
-    {
+    $scope.getNerdsList = function () {
         nerdFactory.getAllNerds()
             .success(function (nerdList) {
                 $scope.status = "Retrived Nerds:"
@@ -21,17 +19,26 @@ angular.module('NerdCtrl', []).controller('NerdController', ["$scope","NerdFacto
             });
     }
 
-    $scope.create = function()
-    {
-        var newNerd = { name: $scope.textbox.textBoxValue }
+    $scope.create = function () {
+        var newNerd = {
+            name: $scope.textbox.textBoxValue
+        }
         $scope.status = 'Inserting Nerd: ' + $scope.textbox.textBoxValue;
         nerdFactory.createNerd(newNerd)
             .success(function () {
                 $scope.status = 'Inserted Nerd!';
                 $scope.getNerdsList();
             }).
-            error(function (error) {
-                $scope.status = 'Inserting Nerd: ' + $scope.textbox.textBoxValue + " ---- " + 'Unable to insert nerd: ' + error.message;
-            });
+        error(function (error) {
+            $scope.status = 'Inserting Nerd: ' + $scope.textbox.textBoxValue + " ---- " + 'Unable to insert nerd: ' + error.message;
+        });
     }
+
 }]);
+
+angular
+    .module('users')
+    .controller('UserController', [
+          'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+          UserController
+       ]);

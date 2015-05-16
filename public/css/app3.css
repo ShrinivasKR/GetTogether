@@ -1,0 +1,39 @@
+body {
+  position:relative;
+}
+
+.intro {position:absolute;
+  left:30px;
+  top:20px;
+  width : 600px;
+  height: 20px;  
+}
+
+.demo {
+  position:relative;  
+  width : 600px;
+  height : 300px; 
+  background-color: #aeaeae; 
+  margin-top:40px;
+  margin-left:0px;
+}
+
+.demo a {
+  text-decoration: none !important;
+  color: white;
+  height:100%;
+  width:100%;
+}
+
+.demo a.visited {
+  color:white;
+}
+
+.demo #content {
+  background-color: rgb(255, 244, 220);
+  padding:30px;
+  font-weight:600;
+  border: 1px solid #aeaeae;
+  border-top:none;
+}
+
