@@ -8,14 +8,23 @@ Install Node.js
 Install MongoDB
 	https://www.mongodb.org/downloads
 	Create the folder structure: C:\data\db\
+	For Mac OS: extract mongodb: 1) cd ~/Downloads 2) sudo mv mongodb-osx-x86_64-3.0.3 /usr/local/mongodb
+	3) create this folder manually and assign proper permission: sudo mkdir -p /data/db 
+	4) sudo chown 'whoami' /data/db ('whoami' is your user name) 5) Add mongodb/bin to $PATH: $ cd ~ $ touch .bash_profile
+         $ vim .bash_profile 6. export MONGO_PATH=/usr/local/mongodb 7)  export PATH=$PATH:$MONGO_PATH/bin 
+         8) Start MongoDB with mongod and make a simple mongo connection with mongo: $ mongod $ mongo
+              
+
+	
 	MongoDB will look here by default for data
 Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Search for equivalent on Mac OS X.)
 	Inside Node.js Command Prompt
-		Go to your project directory (where you cloned the GitHub project)
 		npm install -g bower
+	Change directory to meanGetTogether folder
+		cd somepath\meanGetTogether
+	Install method-override, body-parser, express, and mongoose
 		npm install
 		bower install
-		// These 4 installs fix the errors that appear when running 'node server.js' in Node.js Command Prompt (Windows), in the root-directory meanGetTogether
 Change directory to meanGetTogether folder
 	cd somepath\meanGetTogether
 Verify the server.js file exists in the current directory
@@ -23,11 +32,14 @@ Verify the server.js file exists in the current directory
 		dir
 	On Linux/ Mac OS X:
 		ls | grep server.js
-Start the Node.js server
+Run MongoDB
+	Inside Command Prompt (Windows), change to MongoDB binaries folder
+		cd C:\Program Files\MongoDB\Server\3.0\bin
+	Start the database daemon
+		mongod.exe
+	Optional: Start the MongoDB console to run commands
+		mongo.exe
+Start the Node.js server in the project root-directory meanGetTogether
 	node server.js
 Open a Web browser (such as Firefox, Internet Explorer, Safari, Chrome) to the following URL:
 	http://localhost:8080
-Run MongoDB
-	C:\Program Files\MongoDB\Server\3.0\bin
-	Run mongod.exe
-	Run mongo.exe

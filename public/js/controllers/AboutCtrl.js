@@ -1,5 +1,5 @@
 angular.module('AboutCtrl', []).controller('AboutController', function($scope) {
 
-	$scope.tagline = 'The square root of life is pi!';	
+	$scope.tagline = 'This is probably where we describe the app.';	
 
 });

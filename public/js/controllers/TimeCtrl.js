@@ -1,5 +1,5 @@
 angular.module('TimeCtrl', []).controller('TimeController', function($scope) {
 
-	$scope.tagline = 'The square root of life is pi!';	
+	$scope.tagline = 'Retrives time for event, I think?';	
 
 });
