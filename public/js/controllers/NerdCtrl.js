@@ -35,10 +35,3 @@ angular.module('NerdCtrl', []).controller('NerdController', ["$scope", "NerdFact
     }
 
 }]);
-
-angular
-    .module('users')
-    .controller('UserController', [
-          'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
-          UserController
-       ]);
