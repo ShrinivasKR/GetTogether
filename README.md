@@ -1,20 +1,4 @@
-# MEAN Stack Single Page Application Starter
+# MEAN Stack GetTogether Application
 
-This is a repo for a starter appliation for a Single Page MEAN Stack application. Just download and install and you have a good foundation for building application. 
+People today live increasingly busy lives. However, among busy adults, the need to schedule time to meet face to face is becoming of increasingly high demand. But, as more and more people have less and less time, it becomes difficult to find the time that all parties are free enough to meet. Here at GetTogether we understand that meeting up with other people can be a difficult task. This web application is designed to help with that issue. The product in the simplest sense is a scheduling app. When you open the app it will have you log into your profile where you can then access all of the apps features. By putting in the time you are available on a calendar the app is able to compare it other people’s schedules. By joining a group or creating one the app will compare all of the schedules together and find the time that everyone is available. The app will then find a location for everyone to meet up. This location will be roughly the same distance from everyone in the group.
 
-## Installation
-1. Download the repository
-2. Install npm modules: `npm install`
-3. Install bower dependencies `bower install`
-4. Start up the server: `node server.js`
-5. View in browser at http://localhost:8080
-
-Use this starter kit to build any MEAN stack application you like.
-
-If you have any questions or requests, email us at [chris@scotch.io](mailto:chris@scotch.io) and we'll keep updating this to make it perfect.
-
-## Future Additions
-- CRUD examples
-- Development and Production Environments
-- Link examples
-- Single Page AngularJS Animations
