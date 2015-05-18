@@ -6,6 +6,18 @@ module.exports = function (app) {
 	// handle things like api calls
 	// authentication routes
 
+    app.get('/api/EventLocation', function (req, res) {
+
+        res.json({lat: -33.8665433, long: 151.1956316}); // Dummy response for location API
+
+    });
+
+    app.post('/api/EventLocation', function (req, res) {
+
+        // enter method to do back-end location finding here
+        res.json({ lat: -33.8665433, long: 151.1956316 }); // Dummy response for location API
+    });
+
     // sample api route
     app.get('/api/nerds', function (req, res) {
         // use mongoose to get all nerds in the database
