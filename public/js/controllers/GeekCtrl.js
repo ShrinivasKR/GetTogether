@@ -40,10 +40,12 @@ angular.module('GeekCtrl', []).controller('GeekController', function($scope) {
 	}
 
 	function handleNoGeolocation(errorFlag) {
-	    if (errorFlag) {
+	    if (errorFlag)
+	    {
 	        var content = 'Error: The Geolocation service failed.';
 	    }
-	    else {
+	    else
+	    {
 	        var content = 'Error: Your browser doesn\'t support geolocation.';
 	    }
 
@@ -59,26 +61,33 @@ angular.module('GeekCtrl', []).controller('GeekController', function($scope) {
 	}
 
 
-	function performSearch() {
+	function performSearch()
+	{
 	    var request =
         {
             bounds: map.getBounds(),
-            keyword: 'coffee'
+            radius: '100',
+	        types: ['library', 'cafe',]
+
         };
-	    service.radarSearch(request, callback);
+	    //service.radarSearch(request, callback); // Radar search gets us more options with less variety
+	    service.nearbySearch(request, callback);
 	}
 
-	function callback(results, status) {
-	    if (status != google.maps.places.PlacesServiceStatus.OK) {
+	function callback(results, status)
+	{
+	    if (status != google.maps.places.PlacesServiceStatus.OK)
+	    {
 	        alert(status);
 	        return;
 	    }
-	    for (var i = 0, result; result = results[i]; i++) {
-	        createMarker(result);
-	    }
+	    //for (var i = 0, result; result = results[i]; i++) // Iterates through results
+	    //{}
+	        createMarker(results[0]);
 	}
 
-	function createMarker(place) {
+	function createMarker(place)
+	{
 	    var marker = new google.maps.Marker(
         {
             map: map,
@@ -87,7 +96,7 @@ angular.module('GeekCtrl', []).controller('GeekController', function($scope) {
             {
                 // Star
                 path: 'M 0,-24 6,-7 24,-7 10,4 15,21 0,11 -15,21 -10,4 -24,-7 -6,-7 z',
-                fillColor: '#ffff00',
+                fillColor: '#ff0000',
                 fillOpacity: 1,
                 scale: 1 / 4,
                 strokeColor: '#bd8d2c',
