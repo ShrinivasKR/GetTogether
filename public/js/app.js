@@ -1,13 +1,13 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl']);
+var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl', 'GroupsCtrl', 'EventCtrl', 'ProfileCtrl', 'SettingsCtrl']);
 
 app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location, $log) {
-    
+
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
     $scope.menu = [
         {
-            link: '',
+            link: '/dashboard',
             title: 'Dashboard',
             icon: 'dashboard',
             controller: 'MainController'
@@ -45,9 +45,9 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog'
   ];
     $scope.admin = [
         {
-            link: '',
-            title: 'Trash',
-            icon: 'delete'
+            link: '/settings',
+            title: 'Settings',
+            icon: 'settings'
     },
         {
             link: 'showListBottomSheet($event)',
@@ -180,24 +180,43 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
     // home page
         .when('/', {
-        templateUrl: 'views/home.html',
+        templateUrl: 'views/dashboard.html',
         controller: 'MainController'
     })
 
-    .when('/nerds', {
-        templateUrl: 'views/nerd.html',
-        controller: 'NerdController'
-    })
+    .when('/dashboard', {
+            templateUrl: 'views/dashboard.html',
+            controller: 'MainController'
+        })
+        .when('/nerds', {
+            templateUrl: 'views/nerd.html',
+            controller: 'NerdController'
+        })
 
     .when('/geeks', {
-        templateUrl: 'views/geek.html',
-        controller: 'GeekController'
-    })
-
-    .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginController'
-    });
+            templateUrl: 'views/geek.html',
+            controller: 'GeekController'
+        })
+        .when('/profile', {
+            templateUrl: 'views/profile.html',
+            controller: 'ProfileController'
+        })
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'LoginController'
+        })
+        .when('/event', {
+            templateUrl: 'views/event.html',
+            controller: 'EventController'
+        })
+        .when('/groups', {
+            templateUrl: 'views/groups.html',
+            controller: 'GroupsController'
+        })
+        .when('/settings', {
+            templateUrl: 'views/settings.html',
+            controller: 'SettingsController'
+        });
     $locationProvider.html5Mode(true);
 
 }]);
