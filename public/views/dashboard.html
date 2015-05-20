@@ -2,14 +2,14 @@
     <ng-md-icon icon="add"></ng-md-icon>
 </md-button>
 
-    <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
-        <md-tab id="tab1" aria-controls="tab1-content">
-            Invites
-        </md-tab>
-        <md-tab id="tab2" aria-controls="tab2-content">
-            Going
-        </md-tab>
-    </md-tabs>
+<md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
+    <md-tab id="tab1" aria-controls="tab1-content">
+        New Invites
+    </md-tab>
+    <md-tab id="tab2" aria-controls="tab2-content">
+        Answered Invites
+    </md-tab>
+</md-tabs>
 <md-toolbar class="md-hue-1" ng-show="showSearch">
     <div class="md-toolbar-tools">
         <md-button ng-click="showSearch = !showSearch" aria-label="Back">
@@ -52,6 +52,10 @@
                                             {{item.notes}}
                                         </p>
                                     </div>
+                                    <div class="btn-group">
+                                        <md-button class="md-raised md-primary md-hue-3" ng-model="radioModel" btn-radio="'Middle'">Going</md-button>
+                                        <md-button class="md-raised md-primary md-hue-3" ng-model="radioModel" btn-radio="'Right'">Not-Going</md-button>
+                                    </div>
                                 </md-item-content>
                                 <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
                                 <md-divider hide-gt-sm ng-if="!$last"></md-divider>
@@ -84,6 +88,11 @@
                                         <p>
                                             {{item.notes}}
                                         </p>
+
+                                    </div>
+                                    <div class="btn-group">
+                                        <md-button class="md-raised md-primary md-hue-3" ng-model="radioModel" btn-radio="'Middle'">Going</md-button>
+                                        <md-button class="md-raised md-primary md-hue-3" ng-model="radioModel" btn-radio="'Right'">Not-Going</md-button>
                                     </div>
                                 </md-item-content>
                                 <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
