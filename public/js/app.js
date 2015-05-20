@@ -51,12 +51,12 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog'
             link: '/settings',
             title: 'Settings',
             icon: 'settings'
-    },
-        {
-            link: 'showListBottomSheet($event)',
-            title: 'Settings',
-            icon: 'settings'
-    }
+//    },
+//        {
+//            link: 'showListBottomSheet($event)',
+//            title: 'Settings',
+//            icon: 'settings'
+//    }
   ];
     $scope.activity = [
         {
