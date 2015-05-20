@@ -2,9 +2,9 @@ var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'u
 
 app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location, $log) {
     $scope.checkModel = {
-    middle: true,
-    right: false
-  };
+        middle: true,
+        right: false
+    };
     $scope.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
     };
