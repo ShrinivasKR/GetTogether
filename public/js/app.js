@@ -1,5 +1,5 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute',  'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl', 'GroupsCtrl', 'EventCtrl', 'ProfileCtrl', 'SettingsCtrl']);
-// stripped out: , 'ui.bootstrap'
+var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute',  'ui.bootstrap', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl', 'GroupsCtrl', 'EventCtrl', 'ProfileCtrl', 'SettingsCtrl']);
+// stripped out: ,
 
 app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location, $log) {
     $scope.checkModel = {
