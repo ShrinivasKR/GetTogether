@@ -8,14 +8,14 @@ module.exports = function (app) {
 
     app.get('/api/EventLocation', function (req, res) {
 
-        res.json({lat: -33.8665433, long: 151.1956316}); // Dummy response for location API
+        res.json({ latitude: -33.8665433, longitude: 151.1956316 }); // Dummy response for location API
 
     });
 
     app.post('/api/EventLocation', function (req, res) {
-
+        // The request is currently an event ID-- group ID might make sense too
         // enter method to do back-end location finding here
-        res.json({ lat: -33.8665433, long: 151.1956316 }); // Dummy response for location API
+        res.json({ latitude: -33.8665433, longitude: 151.1956316 }); // Dummy response for location API
     });
 
     // sample api route
