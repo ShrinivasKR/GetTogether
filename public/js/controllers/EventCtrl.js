@@ -1,6 +1,6 @@
 //, 'rgkevin.datetimeRangePicker', 'vr.directives.slider', 'ngTouch'], [require('angular-touch')]
-angular.module('EventCtrl', ['ngMaterial', 'ngMessages', 'ui.bootstrap']).controller('EventController', function ($scope, $log) {
-
+angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventController', function ($scope, $log) {
+    // stripped out: , 'ui.bootstrap'
         $scope.tagline = 'The square root of life is pi!';
         $scope.user = {
             username: 'Enter Username',
