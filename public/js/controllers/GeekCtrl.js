@@ -1,7 +1,6 @@
 angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFactory", function ($scope, geekFactory) {
 
-    $scope.tagline = 'MapsAPI stuff put here temporarily';
-    $scope.status = 'Initilizing';
+    $scope.status = 'Initilizing..';
 
     // ALL the maps stuff!
     var map;

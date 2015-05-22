@@ -15,7 +15,26 @@ module.exports = function (app) {
     app.post('/api/EventLocation', function (req, res) {
         // The request is currently an event ID-- group ID might make sense too
         // enter method to do back-end location finding here
-        res.json({ latitude: -33.8665433, longitude: 151.1956316 }); // Dummy response for location API
+        if (req.body.type == "Test location") {
+            var location1 = { latitude: 47.7594, longitude: -122.1911 }; // UW Bothell
+            var location2 = { latitude: 47.6550, longitude: -122.3080 }; // UW Seattle
+            var location3 = { latitude: 47.9633, longitude: -122.2006 }; // City of Everett
+            var location4 = { latitude: 47.7717, longitude: -122.2044 }; // City of Bothell
+            var locations = [location1, location2, location3, location4];
+
+            var returnLocation = { latitude: 0, longitude: 0 };
+            for (var i = 0; i < locations.length; i++)
+            {
+                returnLocation.latitude += locations[i].latitude;
+                returnLocation.longitude += locations[i].longitude;
+            }
+            returnLocation.latitude /= locations.length;
+            returnLocation.longitude /= locations.length;
+            res.json(returnLocation);
+        }
+        else {
+            res.json({ latitude: 47.7594, longitude: -122.1911 }); // Dummy response for location API; Google in Australia
+        }
     });
 
     // sample api route
