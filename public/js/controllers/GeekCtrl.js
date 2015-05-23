@@ -1,7 +1,6 @@
 angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFactory", function ($scope, geekFactory) {
 
-    $scope.tagline = 'MapsAPI stuff put here temporarily';
-    $scope.status = 'Initilizing';
+    $scope.status = 'Initilizing..';
 
     // ALL the maps stuff!
     var map;
@@ -90,7 +89,7 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
         var request =
         {
             bounds: map.getBounds(),
-            radius: '100',
+            radius: '2000',
             types: ['library', 'cafe', ]
 
         };
@@ -100,7 +99,7 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
 
     function callback(results, status) {
         if (status != google.maps.places.PlacesServiceStatus.OK) {
-            alert(status);
+            console.log("Error: Unable to display search results: " + status);
             return;
         }
         for (var i = 0, result; result = results[i]; i++) // Iterates through results
@@ -127,6 +126,21 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
                 infoWindow.setContent("<b>" + result.name + "</b></br> " + result.formatted_address);
                 infoWindow.open(map, marker);
             });
+        });
+    }
+
+    $scope.createLocation = function () {
+        var newLocation =
+        {
+            latitude: $scope.textbox.textBoxValue,
+            longitude: $scope.textbox.textBoxValueTwo
+        }
+        geekFactory.createLocation(newLocation)
+            .success(function () {
+                console.log("Created new location");
+            }).
+        error(function (error) {
+            console.log('Inserting location: ' + $scope.textbox.textBoxValue + ", " + $scope.textbox.textBoxValueTwo + " ---- " + 'Unable to insert location: ' + error.message);
         });
     }
 
