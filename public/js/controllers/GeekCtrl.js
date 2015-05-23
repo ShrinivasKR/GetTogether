@@ -89,7 +89,7 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
         var request =
         {
             bounds: map.getBounds(),
-            radius: '100',
+            radius: '2000',
             types: ['library', 'cafe', ]
 
         };
@@ -99,7 +99,7 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
 
     function callback(results, status) {
         if (status != google.maps.places.PlacesServiceStatus.OK) {
-            alert(status);
+            console.log("Error: Unable to display search results: " + status);
             return;
         }
         for (var i = 0, result; result = results[i]; i++) // Iterates through results

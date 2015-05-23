@@ -6,8 +6,8 @@ angular.module('GeekService', []).factory('GeekFactory', ['$http', function ($ht
     // This method will get the event location of a particular event
     locationService.getEventLocation = function (eventID) // This might need to change to event name, or something
     {
-        var request = {type: "Test location", eID: eventID};
-        return $http.post("/api/EventLocation", request);
+        //return $http.post("/api/EventLocation/" + eventID, request);
+        return $http.get("/api/EventLocation/test")//, request);
     }
 
     return locationService;
