@@ -33,6 +33,20 @@ module.exports = function (app) {
             returnLocation.longitude /= locations.length;
             res.json(returnLocation);
         }
+        else if(req.params.event_ID == "test2")
+        {
+            Location.find(function (err, locations)
+            {
+                var returnLocation = { latitude: 0, longitude: 0 };
+                for (var i = 0; i < locations.length; i++) {
+                    returnLocation.latitude += locations[i].latitude;
+                    returnLocation.longitude += locations[i].longitude;
+                }
+                returnLocation.latitude /= locations.length;
+                returnLocation.longitude /= locations.length;
+                res.json(returnLocation);
+            });
+        }
         else {
             res.json({ latitude: 47.7594, longitude: -122.1911 }); // Dummy response for location API; Google in Australia
         }
@@ -41,7 +55,34 @@ module.exports = function (app) {
     app.post('/api/EventLocation', function (req, res) {
         // The request is currently an event ID-- group ID might make sense too
         // enter method to do back-end location finding here
-        
+        res.json({ latitude: 47.7594, longitude: -122.1911 });
+    });
+
+    app.get('/api/Location', function (req, res) {
+        Location.find(function (err, locations) {
+
+            // if there is an error retrieving, send the error. 
+            // nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+
+            res.json(locations); // return all nerds in JSON format
+        });
+    });
+
+    app.post('/api/Location', function (req, res) {
+        //To save a location based on the request
+        var location = new Location();
+        location.latitude = req.body.latitude;
+        location.longitude = req.body.longitude;
+
+        location.save(function (err) {
+            console.log("Creating new location");
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Location created!' });
+        });
     });
 
     // sample api route

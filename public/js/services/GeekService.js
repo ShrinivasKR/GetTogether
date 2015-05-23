@@ -7,7 +7,11 @@ angular.module('GeekService', []).factory('GeekFactory', ['$http', function ($ht
     locationService.getEventLocation = function (eventID) // This might need to change to event name, or something
     {
         //return $http.post("/api/EventLocation/" + eventID, request);
-        return $http.get("/api/EventLocation/test")//, request);
+        return $http.get("/api/EventLocation/test2")//, request);
+    }
+
+    locationService.createLocation = function (locationData) {
+        return $http.post('/api/Location', locationData);
     }
 
     return locationService;

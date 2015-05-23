@@ -129,5 +129,20 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
         });
     }
 
+    $scope.createLocation = function () {
+        var newLocation =
+        {
+            latitude: $scope.textbox.textBoxValue,
+            longitude: $scope.textbox.textBoxValueTwo
+        }
+        geekFactory.createLocation(newLocation)
+            .success(function () {
+                console.log("Created new location");
+            }).
+        error(function (error) {
+            console.log('Inserting location: ' + $scope.textbox.textBoxValue + ", " + $scope.textbox.textBoxValueTwo + " ---- " + 'Unable to insert location: ' + error.message);
+        });
+    }
+
     initialize();
 }]);
