@@ -57,3 +57,13 @@ md-sidenav ng-md-icon {
     border-radius: 32px;
     color: black;
 }
+
+/*google maps*/
+#map-canvas {
+            height: 70%;
+            width: 75%;
+            margin: 0px;
+            padding: 0px;
+            margin-right: auto;
+            margin-left: auto;
+}
