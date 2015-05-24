@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var timeSchema = new Schema({ //Military time vs. Regular time?
-    hour: { type: int, min:0, max:23, default: 0}
-    minute: {type: int, min:0, max:59, default: 0}
+    hour: { type: int, min:0, max:23, default: 0},
+    minute: {type: int, min:0, max:59, default: 0},
     second: {type: int, min:0, max:59, default: 0}
     //How to account for AM/PM?
 })

@@ -1,5 +1,7 @@
+var Location = require('./models/gps');
+var Event = require('./models/event');
 var Nerd = require('./models/nerd');
-var Location = require('./models/location');
+var Group = require('./models/group');
 
 module.exports = function (app) {
 
