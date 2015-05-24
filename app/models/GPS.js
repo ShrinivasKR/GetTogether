@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var gpsSchema = new Schema({
-    gpsId: {type: Schema.ObjectId}, 
     longitude: { type: Number, min:-180, max:180, default: 0 },
     latitude: { type: Number, min:-90, max:90, default: 0 }
 })
