@@ -123,13 +123,31 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
                     return;
                 }
 
-                infoWindow.setContent("<b>" + result.name + "</b></br> " + result.formatted_address);
+                infoWindow.setContent("<b>" + result.name + "</b></br> " + result.formatted_address + '</br><button onclick="addLocation(' + result.geometry.location.lat() + ',' + result.geometry.location.lng() + ')">Create</button>');
                 infoWindow.open(map, marker);
             });
         });
     }
 
+    addLocation = function (lat, long) {
+        console.log("Creating location. Lat: " + lat + ", Long: " + long);
+        var newLocation =
+        {
+            latitude: lat,
+            longitude: long
+        }
+        geekFactory.createLocation(newLocation)
+            .success(function () {
+                console.log("Created new location");
+            }).
+        error(function (error) {
+            console.log('Inserting location: ' + $scope.textbox.textBoxValue + ", " + $scope.textbox.textBoxValueTwo + " ---- " + 'Unable to insert location: ' + error.message);
+        });
+    }
+
     $scope.createLocation = function () {
+        addLocation($scope.textbox.textBoxValue, $scope.textbox.textBoxValueTwo);
+        /*
         var newLocation =
         {
             latitude: $scope.textbox.textBoxValue,
@@ -141,7 +159,7 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
             }).
         error(function (error) {
             console.log('Inserting location: ' + $scope.textbox.textBoxValue + ", " + $scope.textbox.textBoxValueTwo + " ---- " + 'Unable to insert location: ' + error.message);
-        });
+        });*/
     }
 
     initialize();
