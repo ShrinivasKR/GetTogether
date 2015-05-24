@@ -4,9 +4,13 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
 
     // ALL the maps stuff!
     var map;
+    var initialZoom = 15;
+    var zoomIncriment = 2;
+    var expanionNum = 0;
+    var maxExpansionNum = 4;
 
     function initialize() {
-        var mapOptions = { zoom: 15 };
+        var mapOptions = { zoom: initialZoom };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
         getPosition();
@@ -85,12 +89,37 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
     }
 
 
-    function performSearch() {
+    function performSearch()
+    {
+        expanionNum++;
+        var typesList = ['library', 'cafe'];
+        var radius = 5000;
+        switch(expanionNum)
+        {
+            case 1:
+                radius = 5000;
+                break;
+            case 2:
+                radius = 10000;
+                break;
+            case 3:
+                radius = 25000;
+                break;
+            case 4:
+                radius = 35000;
+                break;
+            case 5:
+                radius = 50000;
+                typesList += ['city_hall', 'park', 'establishment', 'food', 'night_club'];
+                break;
+            default:
+                expansionNum = maxExpansionNum + 1; // Uhoh. Ensure we're past max num
+        }
         var request =
         {
             bounds: map.getBounds(),
-            radius: '2000',
-            types: ['library', 'cafe', ]
+            radius: '' + radius, // dirty string conversion
+            types: typesList
 
         };
         //service.radarSearch(request, callback); // Radar search gets us more options with less variety
@@ -98,8 +127,15 @@ angular.module('GeekCtrl', []).controller('GeekController', ["$scope", "GeekFact
     }
 
     function callback(results, status) {
-        if (status != google.maps.places.PlacesServiceStatus.OK) {
+        if (status != google.maps.places.PlacesServiceStatus.OK)
+        {
             console.log("Error: Unable to display search results: " + status);
+            if (expanionNum < maxExpansionNum)
+            {
+                console.log("Expanding search paramaters..");
+                google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+                map.setZoom(map.getZoom() - zoomIncriment);
+            }
             return;
         }
         for (var i = 0, result; result = results[i]; i++) // Iterates through results
