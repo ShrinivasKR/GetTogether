@@ -17,7 +17,7 @@ module.exports = function (app) {
 
         if (req.params.event_ID == "test")
         {
-            console.log("Testing location..");
+            console.log("Location test 1..");
             var location1 = { latitude: 47.7594, longitude: -122.1911 }; // UW Bothell
             var location2 = { latitude: 47.6550, longitude: -122.3080 }; // UW Seattle
             var location3 = { latitude: 47.9633, longitude: -122.2006 }; // City of Everett
@@ -37,8 +37,10 @@ module.exports = function (app) {
         {
             Location.find(function (err, locations)
             {
+                console.log("Location test 2..");
                 var returnLocation = { latitude: 0, longitude: 0 };
-                for (var i = 0; i < locations.length; i++) {
+                for (var i = 0; i < locations.length && i < 10; i++) // No more than 10 locations, just in case
+                {
                     returnLocation.latitude += locations[i].latitude;
                     returnLocation.longitude += locations[i].longitude;
                 }
