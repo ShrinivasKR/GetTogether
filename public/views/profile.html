@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
     <md-tab id="tab1" aria-controls="tab1-content">
         Normal
@@ -7,7 +8,7 @@
     </md-tab>
 </md-tabs>
 
-<ng-switch on="data.selectedIndex" class="tabpanel-container">
+<!--<ng-switch on="data.selectedIndex" class="tabpanel-container">
     <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
 <div class="text-center">
     <md-content md-theme="docs-dark" layout-padding="" layout="row" layout-sm="column">
@@ -25,4 +26,194 @@
     <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
 
     </div>
-</ng-switch>
+</ng-switch><!-->
+
+<head>
+    <script>
+    var count = 1;
+    function setColor(btn, color) {
+        var property = document.getElementById(btn);
+        if (count == 0) {
+            property.style.backgroundColor = "#FFFFFF"
+            count = 1;
+        }
+        else {
+            property.style.backgroundColor = "#7FFF00"
+            count = 0;
+        }
+    }
+</script>
+</head>
+<style>
+    table {
+    background: #ff4444;
+    color: #222;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 25px;
+    width: 100%;
+    }
+
+    td {
+    border: 1px solid #ccc;
+    color: #444;
+    line-height: 22px;
+    text-align: center;
+    }
+
+    input {
+    background-color:white
+    }
+</style>
+<body>
+
+<div>
+    <table>
+        <tr>
+            <td>Sun</td>
+            <td>Mon</td>
+            <td>Tue</td>
+            <td>Wed</td>
+            <td>Thu</td>
+            <td>Fri</td>
+            <td>Sat</td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button1" value = " 6am " style= "color:black" onclick="setColor('button1', '#0100110')" onmouseover="setColor('button1', '#0100110')";/></td>
+            <td><input type="button" id="button2" value = " 6am " style= "color:black" onclick="setColor('button2', '#0100110')" onmouseover="setColor('button2', '#0100110')";/></td>
+            <td><input type="button" id="button3" value = " 6am " style= "color:black" onclick="setColor('button3', '#0100110')" onmouseover="setColor('button3', '#0100110')";/></td>
+            <td><input type="button" id="button4" value = " 6am " style= "color:black" onclick="setColor('button4', '#0100110')" onmouseover="setColor('button4', '#0100110')";/></td>
+            <td><input type="button" id="button5" value = " 6am " style= "color:black" onclick="setColor('button5', '#0100110')" onmouseover="setColor('button5', '#0100110')";/></td>
+            <td><input type="button" id="button6" value = " 6am " style= "color:black" onclick="setColor('button6', '#0100110')" onmouseover="setColor('button6', '#0100110')";/></td>
+            <td><input type="button" id="button7" value = " 6am " style= "color:black" onclick="setColor('button7', '#0100110')" onmouseover="setColor('button7', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button8" value = " 7am " style= "color:black" onclick="setColor('button8', '#0100110')" onmouseover="setColor('button8', '#0100110')";/></td>
+            <td><input type="button" id="button9" value = " 7am " style= "color:black" onclick="setColor('button9', '#0100110')" onmouseover="setColor('button9', '#0100110')";/></td>
+            <td><input type="button" id="button10" value = " 7am " style= "color:black" onclick="setColor('button10', '#0100110')" onmouseover="setColor('button10', '#0100110')";/></td>
+            <td><input type="button" id="button11" value = " 7am " style= "color:black" onclick="setColor('button11', '#0100110')" onmouseover="setColor('button11', '#0100110')";/></td>
+            <td><input type="button" id="button12" value = " 7am " style= "color:black" onclick="setColor('button12', '#0100110')" onmouseover="setColor('button12', '#0100110')";/></td>
+            <td><input type="button" id="button13" value = " 7am " style= "color:black" onclick="setColor('button13', '#0100110')" onmouseover="setColor('button13', '#0100110')";/></td>
+            <td><input type="button" id="button14" value = " 7am " style= "color:black" onclick="setColor('button14', '#0100110')" onmouseover="setColor('button14', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button15" value = " 8am " style= "color:black" onclick="setColor('button15', '#0100110')" onmouseover="setColor('button15', '#0100110')";/></td>
+            <td><input type="button" id="button16" value = " 8am " style= "color:black" onclick="setColor('button16', '#0100110')" onmouseover="setColor('button16', '#0100110')";/></td>
+            <td><input type="button" id="button17" value = " 8am " style= "color:black" onclick="setColor('button17', '#0100110')" onmouseover="setColor('button17', '#0100110')";/></td>
+            <td><input type="button" id="button18" value = " 8am " style= "color:black" onclick="setColor('button18', '#0100110')" onmouseover="setColor('button18', '#0100110')";/></td>
+            <td><input type="button" id="button19" value = " 8am " style= "color:black" onclick="setColor('button19', '#0100110')" onmouseover="setColor('button19', '#0100110')";/></td>
+            <td><input type="button" id="button20" value = " 8am " style= "color:black" onclick="setColor('button20', '#0100110')" onmouseover="setColor('button20', '#0100110')";/></td>
+            <td><input type="button" id="button21" value = " 8am " style= "color:black" onclick="setColor('button21', '#0100110')" onmouseover="setColor('button21', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button22" value = " 9am " style= "color:black" onclick="setColor('button22', '#0100110')" onmouseover="setColor('button22', '#0100110')";/></td>
+            <td><input type="button" id="button23" value = " 9am " style= "color:black" onclick="setColor('button23', '#0100110')" onmouseover="setColor('button23', '#0100110')";/></td>
+            <td><input type="button" id="button24" value = " 9am " style= "color:black" onclick="setColor('button24', '#0100110')" onmouseover="setColor('button24', '#0100110')";/></td>
+            <td><input type="button" id="button25" value = " 9am " style= "color:black" onclick="setColor('button25', '#0100110')" onmouseover="setColor('button25', '#0100110')";/></td>
+            <td><input type="button" id="button26" value = " 9am " style= "color:black" onclick="setColor('button26', '#0100110')" onmouseover="setColor('button26', '#0100110')";/></td>
+            <td><input type="button" id="button27" value = " 9am " style= "color:black" onclick="setColor('button27', '#0100110')" onmouseover="setColor('button27', '#0100110')";/></td>
+            <td><input type="button" id="button28" value = " 9am " style= "color:black" onclick="setColor('button28', '#0100110')" onmouseover="setColor('button28', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button29" value = "10am" style= "color:black" onclick="setColor('button29', '#0100110')" onmouseover="setColor('button29', '#0100110')";/></td>
+            <td><input type="button" id="button30" value = "10am" style= "color:black" onclick="setColor('button30', '#0100110')" onmouseover="setColor('button30', '#0100110')";/></td>
+            <td><input type="button" id="button31" value = "10am" style= "color:black" onclick="setColor('button31', '#0100110')" onmouseover="setColor('button31', '#0100110')";/></td>
+            <td><input type="button" id="button32" value = "10am" style= "color:black" onclick="setColor('button32', '#0100110')" onmouseover="setColor('button32', '#0100110')";/></td>
+            <td><input type="button" id="button33" value = "10am" style= "color:black" onclick="setColor('button33', '#0100110')" onmouseover="setColor('button33', '#0100110')";/></td>
+            <td><input type="button" id="button34" value = "10am" style= "color:black" onclick="setColor('button34', '#0100110')" onmouseover="setColor('button34', '#0100110')";/></td>
+            <td><input type="button" id="button35" value = "10am" style= "color:black" onclick="setColor('button35', '#0100110')" onmouseover="setColor('button35', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button36" value = "11am" style= "color:black" onclick="setColor('button36', '#0100110')" onmouseover="setColor('button36', '#0100110')";/></td>
+            <td><input type="button" id="button37" value = "11am" style= "color:black" onclick="setColor('button37', '#0100110')" onmouseover="setColor('button37', '#0100110')";/></td>
+            <td><input type="button" id="button38" value = "11am" style= "color:black" onclick="setColor('button38', '#0100110')" onmouseover="setColor('button38', '#0100110')";/></td>
+            <td><input type="button" id="button39" value = "11am" style= "color:black" onclick="setColor('button39', '#0100110')" onmouseover="setColor('button39', '#0100110')";/></td>
+            <td><input type="button" id="button40" value = "11am" style= "color:black" onclick="setColor('button40', '#0100110')" onmouseover="setColor('button40', '#0100110')";/></td>
+            <td><input type="button" id="button41" value = "11am" style= "color:black" onclick="setColor('button41', '#0100110')" onmouseover="setColor('button41', '#0100110')";/></td>
+            <td><input type="button" id="button42" value = "11am" style= "color:black" onclick="setColor('button42', '#0100110')" onmouseover="setColor('button42', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button43" value = "12pm" style= "color:black" onclick="setColor('button43', '#0100110')" onmouseover="setColor('button43', '#0100110')";/></td>
+            <td><input type="button" id="button44" value = "12pm" style= "color:black" onclick="setColor('button44', '#0100110')" onmouseover="setColor('button44', '#0100110')";/></td>
+            <td><input type="button" id="button45" value = "12pm" style= "color:black" onclick="setColor('button45', '#0100110')" onmouseover="setColor('button45', '#0100110')";/></td>
+            <td><input type="button" id="button46" value = "12pm" style= "color:black" onclick="setColor('button46', '#0100110')" onmouseover="setColor('button46', '#0100110')";/></td>
+            <td><input type="button" id="button47" value = "12pm" style= "color:black" onclick="setColor('button47', '#0100110')" onmouseover="setColor('button47', '#0100110')";/></td>
+            <td><input type="button" id="button48" value = "12pm" style= "color:black" onclick="setColor('button48', '#0100110')" onmouseover="setColor('button48', '#0100110')";/></td>
+            <td><input type="button" id="button49" value = "12pm" style= "color:black" onclick="setColor('button49', '#0100110')" onmouseover="setColor('button49', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button50" value = " 1pm " style= "color:black" onclick="setColor('button50', '#0100110')" onmouseover="setColor('button50', '#0100110')";/></td>
+            <td><input type="button" id="button51" value = " 1pm " style= "color:black" onclick="setColor('button51', '#0100110')" onmouseover="setColor('button51', '#0100110')";/></td>
+            <td><input type="button" id="button52" value = " 1pm " style= "color:black" onclick="setColor('button52', '#0100110')" onmouseover="setColor('button52', '#0100110')";/></td>
+            <td><input type="button" id="button53" value = " 1pm " style= "color:black" onclick="setColor('button53', '#0100110')" onmouseover="setColor('button53', '#0100110')";/></td>
+            <td><input type="button" id="button54" value = " 1pm " style= "color:black" onclick="setColor('button54', '#0100110')" onmouseover="setColor('button54', '#0100110')";/></td>
+            <td><input type="button" id="button55" value = " 1pm " style= "color:black" onclick="setColor('button55', '#0100110')" onmouseover="setColor('button55', '#0100110')";/></td>
+            <td><input type="button" id="button56" value = " 1pm " style= "color:black" onclick="setColor('button56', '#0100110')" onmouseover="setColor('button56', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button57" value = " 2pm " style= "color:black" onclick="setColor('button57', '#0100110')" onmouseover="setColor('button57', '#0100110')";/></td>
+            <td><input type="button" id="button58" value = " 2pm " style= "color:black" onclick="setColor('button58', '#0100110')" onmouseover="setColor('button58', '#0100110')";/></td>
+            <td><input type="button" id="button59" value = " 2pm " style= "color:black" onclick="setColor('button59', '#0100110')" onmouseover="setColor('button59', '#0100110')";/></td>
+            <td><input type="button" id="button60" value = " 2pm " style= "color:black" onclick="setColor('button60', '#0100110')" onmouseover="setColor('button60', '#0100110')";/></td>
+            <td><input type="button" id="button61" value = " 2pm " style= "color:black" onclick="setColor('button61', '#0100110')" onmouseover="setColor('button61', '#0100110')";/></td>
+            <td><input type="button" id="button62" value = " 2pm " style= "color:black" onclick="setColor('button62', '#0100110')" onmouseover="setColor('button62', '#0100110')";/></td>
+            <td><input type="button" id="button63" value = " 2pm " style= "color:black" onclick="setColor('button63', '#0100110')" onmouseover="setColor('button63', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button64" value = " 3pm " style= "color:black" onclick="setColor('button64', '#0100110')" onmouseover="setColor('button64', '#0100110')";/></td>
+            <td><input type="button" id="button65" value = " 3pm " style= "color:black" onclick="setColor('button65', '#0100110')" onmouseover="setColor('button65', '#0100110')";/></td>
+            <td><input type="button" id="button66" value = " 3pm " style= "color:black" onclick="setColor('button66', '#0100110')" onmouseover="setColor('button66', '#0100110')";/></td>
+            <td><input type="button" id="button67" value = " 3pm " style= "color:black" onclick="setColor('button67', '#0100110')" onmouseover="setColor('button67', '#0100110')";/></td>
+            <td><input type="button" id="button68" value = " 3pm " style= "color:black" onclick="setColor('button68', '#0100110')" onmouseover="setColor('button68', '#0100110')";/></td>
+            <td><input type="button" id="button69" value = " 3pm " style= "color:black" onclick="setColor('button69', '#0100110')" onmouseover="setColor('button69', '#0100110')";/></td>
+            <td><input type="button" id="button70" value = " 3pm " style= "color:black" onclick="setColor('button70', '#0100110')" onmouseover="setColor('button70', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button71" value = " 4pm " style= "color:black" onclick="setColor('button71', '#0100110')" onmouseover="setColor('button71', '#0100110')";/></td>
+            <td><input type="button" id="button72" value = " 4pm " style= "color:black" onclick="setColor('button72', '#0100110')" onmouseover="setColor('button72', '#0100110')";/></td>
+            <td><input type="button" id="button73" value = " 4pm " style= "color:black" onclick="setColor('button73', '#0100110')" onmouseover="setColor('button73', '#0100110')";/></td>
+            <td><input type="button" id="button74" value = " 4pm " style= "color:black" onclick="setColor('button74', '#0100110')" onmouseover="setColor('button74', '#0100110')";/></td>
+            <td><input type="button" id="button75" value = " 4pm " style= "color:black" onclick="setColor('button75', '#0100110')" onmouseover="setColor('button75', '#0100110')";/></td>
+            <td><input type="button" id="button76" value = " 4pm " style= "color:black" onclick="setColor('button76', '#0100110')" onmouseover="setColor('button76', '#0100110')";/></td>
+            <td><input type="button" id="button77" value = " 4pm " style= "color:black" onclick="setColor('button77', '#0100110')" onmouseover="setColor('button77', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button78" value = " 5pm " style= "color:black" onclick="setColor('button78', '#0100110')" onmouseover="setColor('button78', '#0100110')";/></td>
+            <td><input type="button" id="button79" value = " 5pm " style= "color:black" onclick="setColor('button79', '#0100110')" onmouseover="setColor('button79', '#0100110')";/></td>
+            <td><input type="button" id="button80" value = " 5pm " style= "color:black" onclick="setColor('button80', '#0100110')" onmouseover="setColor('button80', '#0100110')";/></td>
+            <td><input type="button" id="button81" value = " 5pm " style= "color:black" onclick="setColor('button81', '#0100110')" onmouseover="setColor('button81', '#0100110')";/></td>
+            <td><input type="button" id="button82" value = " 5pm " style= "color:black" onclick="setColor('button82', '#0100110')" onmouseover="setColor('button82', '#0100110')";/></td>
+            <td><input type="button" id="button83" value = " 5pm " style= "color:black" onclick="setColor('button83', '#0100110')" onmouseover="setColor('button83', '#0100110')";/></td>
+            <td><input type="button" id="button84" value = " 5pm " style= "color:black" onclick="setColor('button84', '#0100110')" onmouseover="setColor('button84', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button85" value = " 6pm " style= "color:black" onclick="setColor('button85', '#0100110')" onmouseover="setColor('button85', '#0100110')";/></td>
+            <td><input type="button" id="button86" value = " 6pm " style= "color:black" onclick="setColor('button86', '#0100110')" onmouseover="setColor('button86', '#0100110')";/></td>
+            <td><input type="button" id="button87" value = " 6pm " style= "color:black" onclick="setColor('button87', '#0100110')" onmouseover="setColor('button87', '#0100110')";/></td>
+            <td><input type="button" id="button88" value = " 6pm " style= "color:black" onclick="setColor('button88', '#0100110')" onmouseover="setColor('button88', '#0100110')";/></td>
+            <td><input type="button" id="button89" value = " 6pm " style= "color:black" onclick="setColor('button89', '#0100110')" onmouseover="setColor('button89', '#0100110')";/></td>
+            <td><input type="button" id="button90" value = " 6pm " style= "color:black" onclick="setColor('button90', '#0100110')" onmouseover="setColor('button90', '#0100110')";/></td>
+            <td><input type="button" id="button91" value = " 6pm " style= "color:black" onclick="setColor('button91', '#0100110')" onmouseover="setColor('button91', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button92" value = " 7pm " style= "color:black" onclick="setColor('button92', '#0100110')" onmouseover="setColor('button92', '#0100110')";/></td>
+            <td><input type="button" id="button93" value = " 7pm " style= "color:black" onclick="setColor('button93', '#0100110')" onmouseover="setColor('button93', '#0100110')";/></td>
+            <td><input type="button" id="button94" value = " 7pm " style= "color:black" onclick="setColor('button94', '#0100110')" onmouseover="setColor('button94', '#0100110')";/></td>
+            <td><input type="button" id="button95" value = " 7pm " style= "color:black" onclick="setColor('button95', '#0100110')" onmouseover="setColor('button95', '#0100110')";/></td>
+            <td><input type="button" id="button96" value = " 7pm " style= "color:black" onclick="setColor('button96', '#0100110')" onmouseover="setColor('button96', '#0100110')";/></td>
+            <td><input type="button" id="button97" value = " 7pm " style= "color:black" onclick="setColor('button97', '#0100110')" onmouseover="setColor('button97', '#0100110')";/></td>
+            <td><input type="button" id="button98" value = " 7pm " style= "color:black" onclick="setColor('button98', '#0100110')" onmouseover="setColor('button98', '#0100110')";/></td>
+        </tr>
+        <tr>
+            <td><input type="button" id="button99" value = " 8pm " style= "color:black" onclick="setColor('button99', '#0100110')" onmouseover="setColor('button99', '#0100110')";/></td>
+            <td><input type="button" id="button100" value = " 8pm " style= "color:black" onclick="setColor('button100', '#0100110')" onmouseover="setColor('button100', '#0100110')";/></td>
+            <td><input type="button" id="button101" value = " 8pm " style= "color:black" onclick="setColor('button101', '#0100110')" onmouseover="setColor('button101', '#0100110')";/></td>
+            <td><input type="button" id="button102" value = " 8pm " style= "color:black" onclick="setColor('button102', '#0100110')" onmouseover="setColor('button102', '#0100110')";/></td>
+            <td><input type="button" id="button103" value = " 8pm " style= "color:black" onclick="setColor('button103', '#0100110')" onmouseover="setColor('button103', '#0100110')";/></td>
+            <td><input type="button" id="button104" value = " 8pm " style= "color:black" onclick="setColor('button104', '#0100110')" onmouseover="setColor('button104', '#0100110')";/></td>
+            <td><input type="button" id="button105" value = " 8pm " style= "color:black" onclick="setColor('button105', '#0100110')" onmouseover="setColor('button105', '#0100110')";/></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+
