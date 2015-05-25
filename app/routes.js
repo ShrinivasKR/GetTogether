@@ -9,6 +9,21 @@ module.exports = function (app) {
 	// handle things like api calls
 	// authentication routes
 
+    app.post('/api/Event', function (req, res) {
+        var event = new Event();
+        event.Number = 1;
+        event.date = req.body.date;
+        event.location = req.body.location;
+
+        event.save(function (err) {
+            console.log("Creating new event");
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Event created!' });
+        })
+    });
+
     app.get('/api/EventLocation', function (req, res) {
 
         res.json({ latitude: -33.8665433, longitude: 151.1956316 }); // Dummy response for location API
