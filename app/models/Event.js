@@ -3,8 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
-    id: { type: Number },//or string?
-    //time: { type: Time },
+    id: { type: Number },
     date: { type: Date }, // The built-in mongoose 'Date' includes time, apparently
     location: { type: Schema.ObjectId, ref: "GPS" } // Links to a GPS Object ID
 })
