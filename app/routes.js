@@ -9,18 +9,22 @@ module.exports = function (app) {
 	// handle things like api calls
 	// authentication routes
 
+    //Create an event and return the event ID as a response
     app.post('/api/Event', function (req, res) {
         var event = new Event();
-        event.Number = 1;
-        event.date = req.body.date;
-        event.location = req.body.location;
+        //event.Number = 1; // Events id's are auto-created
+        event.date = req.body.date; // This will be a date object sent from body
+        event.location = req.body.location; // This will be an ID sent from body
 
         event.save(function (err) {
             console.log("Creating new event");
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Event created!' });
+            res.json({
+                message: 'Event created!',
+                eventId: event.id
+            });
         })
     });
 
@@ -67,7 +71,15 @@ module.exports = function (app) {
             });
         }
         else {
-            res.json({ latitude: 47.7594, longitude: -122.1911 }); // Dummy response for location API; Google in Australia
+            Event.findOne({ '_id': event_ID }, function (err, event) {
+
+                // if there is an error retrieving, send the error. 
+                // nothing after res.send(err) will execute
+                if (err)
+                    res.send(err);
+
+                res.json(event.location); // return single location in JSON format
+            });
         }
     })
 
@@ -85,22 +97,19 @@ module.exports = function (app) {
             if (err)
                 res.send(err);
 
-            res.json(locations); // return all nerds in JSON format
+            res.json(locations); // return all locations in JSON format
         });
     });
 
-    app.post('/api/Location', function (req, res) {
-        //To save a location based on the request
-        var location = new Location();
-        location.latitude = req.body.latitude;
-        location.longitude = req.body.longitude;
+    app.get('/api/Location/:location_ID', function (req, res) {
+        Location.findOne({ '_id': location_ID }, function (err, location) {
 
-        location.save(function (err) {
-            console.log("Creating new location");
+            // if there is an error retrieving, send the error. 
+            // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Location created!' });
+            res.json(location); // return single location in JSON format
         });
     });
 
@@ -108,7 +117,6 @@ module.exports = function (app) {
     app.get('/api/nerds', function (req, res) {
         // use mongoose to get all nerds in the database
         Nerd.find(function (err, nerds) {
-
             // if there is an error retrieving, send the error. 
             // nothing after res.send(err) will execute
             if (err)

@@ -60,7 +60,10 @@
         </div>
     </div>
     <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
-
+        <!--Location stuff-->
+        <p>{{ locationStatus }}</p>
+        <div id="map-canvas"></div> <!--This div controls the Map-->
+        <button ng-click="createEvent()">Create Event</button>
     </div>
 
 </ng-switch>
