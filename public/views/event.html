@@ -21,15 +21,19 @@
                 </md-input-container>
             </form>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'">Invite
+                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'" ng-click="showAdd($event)">Invite
                     People
                 </md-button>
             </p>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="inviteGroups" btn-radio="'Middle'">Invite
+                <md-button class="md-raised md-primary md-hue-3" ng-model="inviteGroups" btn-radio="'Middle'" ng-click="showAdd($event)">Invite
                     Groups
                 </md-button>
             </p>
+            <div class="btn-group">
+                <md-button class="md-raised md-primary md-hue-3" ng-model="priority" btn-radio="'Middle'">Normal</md-button>
+                <md-button class="md-raised md-primary md-hue-3" ng-model="priority" btn-radio="'Right'">High-Priority</md-button>
+            </div>
         </md-content>
     </div>
     <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
