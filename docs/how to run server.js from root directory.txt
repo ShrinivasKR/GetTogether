@@ -6,10 +6,15 @@ Install Git
 Install Node.js
 	https://nodejs.org/download/
 Install MongoDB
-	https://www.mongodb.org/downloads
+	On Amazon EC2:
+		http://docs.mongodb.org/ecosystem/platforms/amazon-ec2/
 	On Windows:
+		Download and install MongoDB
+			https://www.mongodb.org/downloads
 		Create the folder structure: C:\data\db\
 	On Mac OS:
+		Download MongoDB
+			https://www.mongodb.org/downloads
 		Extract mongodb
 			cd ~/Downloads
 			sudo mv mongodb-osx-x86_64-3.0.3 /usr/local/mongodb
