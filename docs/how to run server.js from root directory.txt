@@ -29,7 +29,7 @@ Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Search for
 		Change directory to meanGetTogether folder
 			cd somepath\meanGetTogether
 		Install bower, method-override, body-parser, express, and mongoose
-			npm install -g bower && npm install && bower install
+			sudo npm install -g bower && npm install && bower install
 Run MongoDB
 	On Windows:
 		Inside Command Prompt, change to MongoDB binaries folder
