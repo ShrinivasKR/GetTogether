@@ -30,7 +30,7 @@ Install MongoDB
 					export MONGO_PATH=/usr/local/mongodb
 					export PATH=$PATH:$MONGO_PATH/bin 
 	MongoDB will look in the C:\data\db\ directory by default for data in Windows (/data/db on Mac OS)
-Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Search for equivalent on Mac OS X.)
+Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Open Terminal in Mac OS by pressing command key and spacebar, then typing "terminal".)
 	Inside Node.js Command Prompt
 		Change directory to meanGetTogether folder
 			cd somepath\meanGetTogether
