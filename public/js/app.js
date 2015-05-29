@@ -26,21 +26,21 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog'
             title: 'Groups',
             icon: 'group'
     },
-        {
-            link: '/nerds',
-            title: 'Nerds',
-            icon: 'school',
-            controller: 'NerdController'
-
-    },
-
-        {
-            link: '/geeks',
-            title: 'Geek',
-            icon: 'school',
-            controller: 'GeekController'
-
-    },
+//        {
+//            link: '/nerds',
+//            title: 'Nerds',
+//            icon: 'school',
+//            controller: 'NerdController'
+//
+//    },
+//
+//        {
+//            link: '/geeks',
+//            title: 'Geek',
+//            icon: 'school',
+//            controller: 'GeekController'
+//
+//    },
         {
             link: '/event',
             title: 'Create Event',
