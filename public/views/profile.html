@@ -28,28 +28,28 @@
 
 <head>
     <script>
-	var Times = [];
-	var TimesLength = 105;
-	
-	for (i = 0; i <=TimesLength; i++){
-		Times[i] = false;
-	}
+    var Times = [];
+    var TimesLength = 105;
+
+    for (i = 0; i <=TimesLength; i++){
+        Times[i] = false;
+    }
 
     function setColor(btn, num) {
         var property = document.getElementById(btn);
-		if (Times[num] == true){
-			property.style.backgroundColor = "#FFFFFF"
-			Times[num] = false;
-		} else {
-			 property.style.backgroundColor = "#7FFF00"
-			 Times[num] = true;
-		}
+        if (Times[num] == true){
+            property.style.backgroundColor = "#FFFFFF"
+            Times[num] = false;
+        } else {
+             property.style.backgroundColor = "#76FF03"
+             Times[num] = true;
+        }
     }
 </script>
 </head>
 <style>
     table {
-    background: #ff4444;
+    background: #FF3D00;
     color: #222;
     font-family: 'PT Sans', sans-serif;
     font-size: 25px;

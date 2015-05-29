@@ -1,4 +1,4 @@
-<md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
+<md-tabs md-stretch-tabs class="md-primary md-hue-1" md-selected="data.selectedIndex">
     <md-tab id="tab1" aria-controls="tab1-content">
         About
     </md-tab>
@@ -21,13 +21,13 @@
                 </md-input-container>
             </form>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'" ng-click="showAdd($event)">Invite
-                    People
+                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'"
+                           ng-click="showAdd($event)">Invite People
                 </md-button>
             </p>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="inviteGroups" btn-radio="'Middle'" ng-click="showAdd($event)">Invite
-                    Groups
+                <md-button class="md-raised md-primary md-hue-3" ng-model="inviteGroups" btn-radio="'Middle'"
+                           ng-click="showAdd($event)">Invite Groups
                 </md-button>
             </p>
             <div class="btn-group">
@@ -66,8 +66,15 @@
     <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
         <!--Location stuff-->
         <p>{{ locationStatus }}</p>
-        <div id="map-canvas"></div> <!--This div controls the Map-->
-        <button ng-click="createEvent()">Create Event</button>
+
+        <div id="map-canvas"></div>
+        <!--This div controls the Map-->
     </div>
 
 </ng-switch>
+<section layout="row" layout-sm="column" layout-align="center center">
+    <md-button class="md-accent md-raised md-hue-1" ng-click="createEvent()"
+               style="position: fixed; bottom: 0px; left: 0px; width: 100%;">Create Event
+    </md-button>
+</section>
+
