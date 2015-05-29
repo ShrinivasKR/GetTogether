@@ -21,7 +21,8 @@ Install MongoDB
 		Make this directory
 			sudo mkdir -p /data/db
 		Assign proper permission
-			sudo chown 'whoami' /data/db ('whoami' is your user name)
+			sudo chown 'whoami' /data/db
+			Note: 'whoami' is your user name
 		Add mongodb/bin to $PATH
 			cd ~
          		vim .bash_profile
