@@ -37,31 +37,9 @@
         </md-content>
     </div>
     <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
-        <div>
-
-            <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep"
-                        show-meridian="ismeridian"></timepicker>
-
-            <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
-
-            <div class="row">
-                <div class="col-xs-6">
-                    Hours step is:
-                    <select class="form-control" ng-model="hstep" ng-options="opt for opt in options.hstep"></select>
-                </div>
-                <div class="col-xs-6">
-                    Minutes step is:
-                    <select class="form-control" ng-model="mstep" ng-options="opt for opt in options.mstep"></select>
-                </div>
-            </div>
-
-            <hr>
-
-            <button class="btn btn-info" ng-click="toggleMode()">12H / 24H</button>
-            <button class="btn btn-default" ng-click="update()">Set to 14:00</button>
-            <button class="btn btn-danger" ng-click="clear()">Clear</button>
-
-        </div>
+        <md-content layout-padding="" layout-sm="column" class="text-center">
+            <time-date-picker ng-model="dateValue"></time-date-picker>
+        </md-content>
     </div>
     <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
         <!--Location stuff-->
