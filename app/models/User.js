@@ -2,14 +2,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var nerdSchema = new Schema({
-    name: { type: String, default: 'New Nerd' },
+var userSchema = new Schema({
+    name: { type: String, default: 'New User' },
     email: { type: String }, //need default values for?
     password: { type: String }, //                   |
     location: { type: Array },    // Array of GPS    | 
     groups: { type: Array },  // Array of groups     |
     schedule: { type: Array }// Array of Events      v
 })
-// define our nerd model
+// define our user model
 // module.exports allows us to pass this to other files when it is called
-module.exports = mongoose.model('Nerd', nerdSchema);
+module.exports = mongoose.model('User', userSchema);

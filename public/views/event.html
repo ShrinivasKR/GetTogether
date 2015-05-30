@@ -44,9 +44,8 @@
     <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
         <!--Location stuff-->
         <p>{{ locationStatus }}</p>
-
-        <div id="map-canvas"></div>
-        <!--This div controls the Map-->
+        <div id="map-canvas"></div> <!--This div controls the Map-->
+        <button ng-click="getEventLocation()">Get Location</button>
     </div>
     <!--    Persistant create event button on the bottom-->
     <md-button class="md-accent md-raised md-hue-1 text-center" ng-click="createEvent()"

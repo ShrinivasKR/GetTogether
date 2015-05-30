@@ -1,6 +1,7 @@
+var mongoose = require('mongoose');
 var Location = require('./models/gps');
 var Event = require('./models/event');
-var Nerd = require('./models/nerd');
+var User = require('./models/user');
 var Group = require('./models/group');
 
 module.exports = function (app) {
@@ -14,18 +15,33 @@ module.exports = function (app) {
         var event = new Event();
         //event.Number = 1; // Events id's are auto-created
         event.date = req.body.date; // This will be a date object sent from body
-        event.location = req.body.location; // This will be an ID sent from body
+        event.location = mongoose.Types.ObjectId(req.body.location); // This will be an ID sent from body
 
         event.save(function (err) {
             console.log("Creating new event");
             if (err)
                 res.send(err);
-
+            console.log("EventId: " + event.id);
             res.json({
                 message: 'Event created!',
                 eventId: event.id
             });
         })
+    });
+
+
+    // This method finds ALL of the events.
+    // Avoid using this.
+    app.get('/api/Event', function (req, res) {
+        Event.find(function (err, events) {
+
+            // if there is an error retrieving, send the error. 
+            // nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+
+            res.json(events); // return all locations in JSON format
+        });
     });
 
     app.get('/api/EventLocation', function (req, res) {
@@ -71,24 +87,30 @@ module.exports = function (app) {
             });
         }
         else {
-            Event.findOne({ '_id': event_ID }, function (err, event) {
+            Event.findOne({ '_id': req.params.event_ID }).populate("location").exec( function (err, event) {
 
                 // if there is an error retrieving, send the error. 
                 // nothing after res.send(err) will execute
-                if (err)
-                    res.send(err);
+                if (err) // This means that our location didn't exist
+                    res.send(err); // This is effectively a 'return'
+
+                console.log("Event: " + event);
+                console.log("Location: " + event.location);
+                console.log("Latitude: " + event.latitude);
 
                 res.json(event.location); // return single location in JSON format
             });
         }
     })
 
-    app.post('/api/EventLocation', function (req, res) {
+    app.post('/api/EventLocation/:event_ID', function (req, res) {
         // The request is currently an event ID-- group ID might make sense too
         // enter method to do back-end location finding here
         res.json({ latitude: 47.7594, longitude: -122.1911 });
     });
 
+    // This method gets ALL locations stored in the database.
+    // Avoid using this. Use the :location_ID method instead.
     app.get('/api/Location', function (req, res) {
         Location.find(function (err, locations) {
 
@@ -102,7 +124,7 @@ module.exports = function (app) {
     });
 
     app.get('/api/Location/:location_ID', function (req, res) {
-        Location.findOne({ '_id': location_ID }, function (err, location) {
+        Location.findOne({ '_id': req.params.location_ID }, function (err, location) {
 
             // if there is an error retrieving, send the error. 
             // nothing after res.send(err) will execute
@@ -114,30 +136,31 @@ module.exports = function (app) {
     });
 
     // sample api route
-    app.get('/api/nerds', function (req, res) {
-        // use mongoose to get all nerds in the database
-        Nerd.find(function (err, nerds) {
+    // This finds ALL users. Avoid using this.
+    app.get('/api/users', function (req, res) {
+        // use mongoose to get all users in the database
+        User.find(function (err, users) {
             // if there is an error retrieving, send the error. 
             // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
 
-            res.json(nerds); // return all nerds in JSON format
+            res.json(users); // return all users in JSON format
         });
     });
 
     // route to handle creating goes here (app.post)
-    app.post('/api/nerds', function (req, res) {
+    app.post('/api/users', function (req, res) {
         
-        var nerd = new Nerd();      // create a new instance of the Nerd model
-        nerd.name = req.body.name;  // set the nerd's name (comes from the request)
+        var user = new User();      // create a new instance of the User model
+        user.name = req.body.name;  // set the user's name (comes from the request)
 
-        // save the nerd and check for errors
-        nerd.save(function (err) {
+        // save the user and check for errors
+        user.save(function (err) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Nerd named "' + req.body.name + '" created!' });
+            res.json({ message: 'User named "' + req.body.name + '" created!' });
         });
         
     });
