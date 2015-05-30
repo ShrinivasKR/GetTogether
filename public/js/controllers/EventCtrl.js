@@ -1,12 +1,13 @@
 //, 'rgkevin.datetimeRangePicker', 'vr.directives.slider', 'ngTouch'], [require('angular-touch')]
 angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventController', ["$scope", "EventFactory", function ($scope, eventFactory) {
     // stripped out: , 'ui.bootstrap'
-    $scope.tagline = 'The square root of life is pi!';
+
     $scope.user = {
         username: 'Enter Username',
         password: 'Enter Password',
     };
-    $scope.mytime = new Date();
+    $scope.mytime = new Date(); // This will be the time used to create the final event 
+    $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
 
     $scope.hstep = 1;
     $scope.mstep = 15;
@@ -42,7 +43,8 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     $scope.createEvent = function () // Should take paramaters, probably
     {
         // Create an example event
-        var eventDate = new Date();
+        var eventDate = $scope.mytime;
+
         var locationID = '55621a44fc7fc4b006d34ca3';
         var event = {
             date: eventDate,

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Location = require('./models/gps');
 var Event = require('./models/event');
-var Nerd = require('./models/nerd');
+var User = require('./models/user');
 var Group = require('./models/group');
 
 module.exports = function (app) {
@@ -27,6 +27,21 @@ module.exports = function (app) {
                 eventId: event.id
             });
         })
+    });
+
+
+    // This method finds ALL of the events.
+    // Avoid using this.
+    app.get('/api/Event', function (req, res) {
+        Event.find(function (err, events) {
+
+            // if there is an error retrieving, send the error. 
+            // nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+
+            res.json(events); // return all locations in JSON format
+        });
     });
 
     app.get('/api/EventLocation', function (req, res) {
@@ -94,6 +109,8 @@ module.exports = function (app) {
         res.json({ latitude: 47.7594, longitude: -122.1911 });
     });
 
+    // This method gets ALL locations stored in the database.
+    // Avoid using this. Use the :location_ID method instead.
     app.get('/api/Location', function (req, res) {
         Location.find(function (err, locations) {
 
@@ -119,30 +136,31 @@ module.exports = function (app) {
     });
 
     // sample api route
-    app.get('/api/nerds', function (req, res) {
-        // use mongoose to get all nerds in the database
-        Nerd.find(function (err, nerds) {
+    // This finds ALL users. Avoid using this.
+    app.get('/api/users', function (req, res) {
+        // use mongoose to get all users in the database
+        User.find(function (err, users) {
             // if there is an error retrieving, send the error. 
             // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
 
-            res.json(nerds); // return all nerds in JSON format
+            res.json(users); // return all users in JSON format
         });
     });
 
     // route to handle creating goes here (app.post)
-    app.post('/api/nerds', function (req, res) {
+    app.post('/api/users', function (req, res) {
         
-        var nerd = new Nerd();      // create a new instance of the Nerd model
-        nerd.name = req.body.name;  // set the nerd's name (comes from the request)
+        var user = new User();      // create a new instance of the User model
+        user.name = req.body.name;  // set the user's name (comes from the request)
 
-        // save the nerd and check for errors
-        nerd.save(function (err) {
+        // save the user and check for errors
+        user.save(function (err) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Nerd named "' + req.body.name + '" created!' });
+            res.json({ message: 'User named "' + req.body.name + '" created!' });
         });
         
     });
