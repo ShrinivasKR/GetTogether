@@ -1,4 +1,4 @@
-<md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
+<md-tabs md-stretch-tabs class="md-primary md-hue-1" md-selected="data.selectedIndex">
     <md-tab id="tab1" aria-controls="tab1-content">
         About
     </md-tab>
@@ -21,50 +21,35 @@
                 </md-input-container>
             </form>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'">Invite
-                    People
+                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'"
+                           ng-click="showAdd($event)">Invite People
                 </md-button>
             </p>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="inviteGroups" btn-radio="'Middle'">Invite
-                    Groups
+                <md-button class="md-raised md-primary md-hue-3" ng-model="inviteGroups" btn-radio="'Middle'"
+                           ng-click="showAdd($event)">Invite Groups
                 </md-button>
             </p>
+            <div class="btn-group">
+                <md-button class="md-raised md-primary md-hue-3" ng-model="priority" btn-radio="'Middle'">Normal</md-button>
+                <md-button class="md-raised md-primary md-hue-3" ng-model="priority" btn-radio="'Right'">High-Priority</md-button>
+            </div>
         </md-content>
     </div>
+    <!--http://simeonc.github.io/md-date-time/-->
+    <!--reference on time-date-picker-->
     <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
-        <div>
-
-            <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep"
-                        show-meridian="ismeridian"></timepicker>
-
-            <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
-
-            <div class="row">
-                <div class="col-xs-6">
-                    Hours step is:
-                    <select class="form-control" ng-model="hstep" ng-options="opt for opt in options.hstep"></select>
-                </div>
-                <div class="col-xs-6">
-                    Minutes step is:
-                    <select class="form-control" ng-model="mstep" ng-options="opt for opt in options.mstep"></select>
-                </div>
-            </div>
-
-            <hr>
-
-            <button class="btn btn-info" ng-click="toggleMode()">12H / 24H</button>
-            <button class="btn btn-default" ng-click="update()">Set to 14:00</button>
-            <button class="btn btn-danger" ng-click="clear()">Clear</button>
-
-        </div>
+            <time-date-picker ng-model="dateValue"></time-date-picker>
     </div>
     <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
         <!--Location stuff-->
         <p>{{ locationStatus }}</p>
         <div id="map-canvas"></div> <!--This div controls the Map-->
-        <button ng-click="createEvent()">Create Event</button>
         <button ng-click="getEventLocation()">Get Event Location</button>
     </div>
-
+    <!--    Persistant create event button on the bottom-->
+    <md-button class="md-accent md-raised md-hue-1 text-center" ng-click="createEvent()"
+               style="position: absolute; bottom: 0px; width: 100%;">
+        Create Event
+    </md-button>
 </ng-switch>

@@ -1,4 +1,4 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'ui.bootstrap', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl', 'GroupsCtrl', 'EventCtrl', 'EventService', 'ProfileCtrl', 'SettingsCtrl']);
+var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'mdDateTime', 'ui.bootstrap', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl', 'GroupsCtrl', 'EventCtrl', 'EventService', 'ProfileCtrl', 'SettingsCtrl']);
 // stripped out: ,
 
 app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location, $log) {
@@ -26,21 +26,21 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog'
             title: 'Groups',
             icon: 'group'
     },
-        {
-            link: '/nerds',
-            title: 'Nerds',
-            icon: 'school',
-            controller: 'NerdController'
-
-    },
-
-        {
-            link: '/geeks',
-            title: 'Geek',
-            icon: 'school',
-            controller: 'GeekController'
-
-    },
+//        {
+//            link: '/nerds',
+//            title: 'Nerds',
+//            icon: 'school',
+//            controller: 'NerdController'
+//
+//    },
+//
+//        {
+//            link: '/geeks',
+//            title: 'Geek',
+//            icon: 'school',
+//            controller: 'GeekController'
+//
+//    },
         {
             link: '/event',
             title: 'Create Event',
@@ -162,22 +162,22 @@ app.directive('userAvatar', function () {
     };
 });
 
-app.config(function ($mdThemingProvider) {
-    var customBlueMap = $mdThemingProvider.extendPalette('light-blue', {
-        'contrastDefaultColor': 'light',
-        'contrastDarkColors': ['50'],
-        '50': 'ffffff'
-    });
-    $mdThemingProvider.definePalette('customBlue', customBlueMap);
-    $mdThemingProvider.theme('default')
-        .primaryPalette('customBlue', {
-            'default': '500',
-            'hue-1': '50'
-        })
-        .accentPalette('pink');
-    $mdThemingProvider.theme('input', 'default')
-        .primaryPalette('grey')
-});
+//app.config(function ($mdThemingProvider) {
+//    var customBlueMap = $mdThemingProvider.extendPalette('light-blue', {
+//        'contrastDefaultColor': 'light',
+//        'contrastDarkColors': ['50'],
+//        '50': 'ffffff'
+//    });
+//    $mdThemingProvider.definePalette('customBlue', customBlueMap);
+//    $mdThemingProvider.theme('default')
+//        .primaryPalette('customBlue', {
+//            'default': '500',
+//            'hue-1': '50'
+//        })
+//        .accentPalette('pink');
+//    $mdThemingProvider.theme('input', 'default')
+//        .primaryPalette('grey')
+//});
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider
