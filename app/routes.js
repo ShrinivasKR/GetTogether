@@ -1,3 +1,4 @@
+var mongoose = require('mongoose');
 var Location = require('./models/gps');
 var Event = require('./models/event');
 var Nerd = require('./models/nerd');
@@ -14,13 +15,13 @@ module.exports = function (app) {
         var event = new Event();
         //event.Number = 1; // Events id's are auto-created
         event.date = req.body.date; // This will be a date object sent from body
-        event.location = req.body.location; // This will be an ID sent from body
+        event.location = mongoose.Types.ObjectId(req.body.location); // This will be an ID sent from body
 
         event.save(function (err) {
             console.log("Creating new event");
             if (err)
                 res.send(err);
-
+            console.log("EventId: " + event.id);
             res.json({
                 message: 'Event created!',
                 eventId: event.id
@@ -71,19 +72,23 @@ module.exports = function (app) {
             });
         }
         else {
-            Event.findOne({ '_id': event_ID }, function (err, event) {
+            Event.findOne({ '_id': req.params.event_ID }).populate("location").exec( function (err, event) {
 
                 // if there is an error retrieving, send the error. 
                 // nothing after res.send(err) will execute
-                if (err)
-                    res.send(err);
+                if (err) // This means that our location didn't exist
+                    res.send(err); // This is effectively a 'return'
+
+                console.log("Event: " + event);
+                console.log("Location: " + event.location);
+                console.log("Latitude: " + event.latitude);
 
                 res.json(event.location); // return single location in JSON format
             });
         }
     })
 
-    app.post('/api/EventLocation', function (req, res) {
+    app.post('/api/EventLocation/:event_ID', function (req, res) {
         // The request is currently an event ID-- group ID might make sense too
         // enter method to do back-end location finding here
         res.json({ latitude: 47.7594, longitude: -122.1911 });
@@ -102,7 +107,7 @@ module.exports = function (app) {
     });
 
     app.get('/api/Location/:location_ID', function (req, res) {
-        Location.findOne({ '_id': location_ID }, function (err, location) {
+        Location.findOne({ '_id': req.params.location_ID }, function (err, location) {
 
             // if there is an error retrieving, send the error. 
             // nothing after res.send(err) will execute

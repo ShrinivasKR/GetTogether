@@ -39,16 +39,31 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     /* Location stuff */
     $scope.locationStatus = "Please enter users in order to auto-generate a place";
 
-    $scope.createEvent = function () {
+    $scope.createEvent = function () // Should take paramaters, probably
+    {
         // Create an example event
         var eventDate = new Date();
-        var locationID = '556364d9f5aee374129d55f9';
+        var locationID = '55621a44fc7fc4b006d34ca3';
         var event = {
             date: eventDate,
             location: locationID
 
         };
         eventFactory.createEvent(event);
+    };
+
+    $scope.getEventLocation = function () // Should take paramaters
+    {
+        var eventID = '55676b1a846524bc14f2efa2';
+        eventFactory.getEventLocation(eventID)
+            .success(function (locationData) {
+                $scope.locationStatus = "Retrived Location: " + locationData.latitude + ", " + locationData.longitude;
+
+                //$scope.nerdData = nerdList;
+            })
+            .error(function (error) {
+                $scope.locationStatus = 'Unable to load location: ' + error.message;
+            });
     };
 }])
 .config(function ($mdThemingProvider) {

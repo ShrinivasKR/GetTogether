@@ -6,7 +6,7 @@
     eventService.getEventLocation = function (eventID) // This might need to change to event name, or something
     {
         //return $http.post("/api/EventLocation/" + eventID, request);
-        return $http.get("/api/EventLocation/test2")//, request);
+        return $http.get("/api/EventLocation/" + eventID)//, request);
     }
 
     eventService.createLocation = function (locationData) {
