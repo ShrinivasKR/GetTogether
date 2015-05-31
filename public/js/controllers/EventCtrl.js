@@ -20,9 +20,9 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     };
     $scope.mytime = new Date(); // This will be the time used to create the final event 
     $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
-    $scope.userId = ['556a4f80ecff2b7c03a2fa71']; // Example of our user creating the event
+    $scope.userId = ['556b52a9e7087fac0c825179']; // Example of our user creating the event
     $scope.usersData = ['Test User UW Bothell', 'Test User UW Seattle', 'Test User Everett']; // These example names live in database
-    var usersData = ['556a4f80ecff2b7c03a2fa71', '556a4f88ecff2b7c03a2fa72', '556a4f8decff2b7c03a2fa73']; // Also example
+    var usersData = ['556b52a9e7087fac0c82517a', '556b52a9e7087fac0c82517b', '556b52a9e7087fac0c82517c']; // Also example
 
     $scope.hstep = 1;
     $scope.mstep = 15;
@@ -114,6 +114,18 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
                 $scope.locationStatus = 'Unable to load location: ' + error.message;
             });
     };
+
+    $scope.getEvent = function()
+    {
+        var eventID = '556b547708dc1bfc0ecf774d';
+        eventFactory.getEvent(eventID)
+            .success(function (eventData) {
+                console.log(eventData);
+                $scope.locationStatus = "Retrived Event: " + eventData.location.latitude;
+            }).error(function (error) {
+                $scope.locationStatus = 'Unable to load event: ' + error.message;
+            });
+    }
 
     /* ======= Maps functions ======= */
 

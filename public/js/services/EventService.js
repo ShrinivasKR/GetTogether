@@ -11,6 +11,13 @@
         return $http.post('api/EventLocation', params);
     }
 
+    // Get an event by eventID -- Includes the event's location and creator data
+    //  The atendees come over as IDs
+    eventService.getEvent = function(eventID)
+    {
+        return $http.get('/api/Event/' + eventID);
+    }
+
     // This method will get the event location of a particular event
     eventService.getEventLocation = function (eventID) // This might need to change to event name, or something
     {

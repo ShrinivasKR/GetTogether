@@ -46,7 +46,6 @@ module.exports = function (app) {
         //event.location = mongoose.Types.ObjectId(req.body.location); // This will be an ID sent from body
     });
 
-
     // This method finds ALL of the events.
     // Avoid using this.
     app.get('/api/Event', function (req, res) {
@@ -58,6 +57,17 @@ module.exports = function (app) {
                 res.send(err);
 
             res.json(events); // return all locations in JSON format
+        });
+    });
+
+    // This method finds an event based on it's eventID
+    //  It returns an event, it's location, it's creator, and the UserIDs of it's attendees
+    app.get('/api/Event/:event_ID', function (req, res) {
+        Event.findOne({ '_id': req.params.event_ID }).populate("location creator").exec(function (err, event) {
+            if (err)
+                res.send(err);
+            console.log(event);
+            res.json(event);
         });
     });
 
@@ -169,7 +179,6 @@ module.exports = function (app) {
 
     app.post('/api/EventLocation/:event_ID', function (req, res) {
         // The request is currently an event ID-- group ID might make sense too
-        // enter method to do back-end location finding here
         res.json({ latitude: 47.7594, longitude: -122.1911 });
     });
 
@@ -259,7 +268,7 @@ module.exports = function (app) {
         var location1 = { latitude: 47.7594, longitude: -122.1911 }; // UW Bothell
         var location2 = { latitude: 47.6550, longitude: -122.3080 }; // UW Seattle
         var location3 = { latitude: 47.9633, longitude: -122.2006 }; // City of Everett
-        var locations = [location1, location2, location3];
+        var locations = [location1, location1,location2, location3];
         var numLocations = locations.length;
         var topDatabaseQueryNum = 0;
         for (var l = 0; l < numLocations; l++)
@@ -280,7 +289,7 @@ module.exports = function (app) {
                 if (topDatabaseQueryNum == numLocations) // We've added all of our locations; add our users
                 {
                     /* Add test users*/
-                    var users = ["Test User UW Bothell", "Test User UW Seattle", "Test User Everett"];
+                    var users = ["Test User","Test User UW Bothell", "Test User UW Seattle", "Test User Everett"];
                     var numUsers = users.length;
                     var secondDatabaseQueryNum = 0;
                     for (var i = 0; i < numUsers; i++) { // Add some predetermined test users
