@@ -74,7 +74,7 @@ module.exports = function (app) {
             var returnLocation = { latitude: 0, longitude: 0 }; // Loction to return at the end (must start at 0,0)
             for (var i = 0; i < numUsers; i++) {
                 User.findOne({ '_id': users[i] }).populate("location").exec(function (err, user) {
-                    if (err) {
+                    if (err || user == null) {
                         databaseReturnCount++;
                         console.log("ERROR: Could not find user: " + users[i]);
                     }
