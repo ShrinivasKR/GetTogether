@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     name: { type: String, default: 'New User' },
-    email: { type: String }, //need default values for?
-    password: { type: String }, //                   |
-    location: { type: Array },    // Array of GPS    | 
-    groups: { type: Array },  // Array of groups     |
-    schedule: { type: Array }// Array of Events      v
+    email: { type: String }, //    need default values for?
+    password: { type: String }, //                     |
+    location: { type: Schema.ObjectId, ref: 'GPS' },// | 
+    groups: { type: Array },  // Array of groups       |
+    schedule: { type: Array }// Array of Events        v
 })
 // define our user model
 // module.exports allows us to pass this to other files when it is called
