@@ -21,7 +21,7 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     $scope.mytime = new Date(); // This will be the time used to create the final event 
     $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
     $scope.userId = ['556a4f80ecff2b7c03a2fa71']; // Example of our user creating the event
-    $scope.usersData = ['name1', 'name2', 'name3']; // Example
+    $scope.usersData = ['Test User UW Bothell', 'Test User UW Seattle', 'Test User Everett']; // These example names live in database
     var usersData = ['556a4f80ecff2b7c03a2fa71', '556a4f88ecff2b7c03a2fa72', '556a4f8decff2b7c03a2fa73']; // Also example
 
     $scope.hstep = 1;
