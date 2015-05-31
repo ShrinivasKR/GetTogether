@@ -270,13 +270,13 @@ module.exports = function (app) {
 
             // save the user and check for errors
             console.log('Creating Location at <' + loc.latitude + ', ' + loc.longitude + '>..');
+            locationIds.push(loc.id);
             loc.save(function (err)
             {
                 if (err)
                     res.send(err);
 
                 topDatabaseQueryNum++;
-                locationIds.push(loc.id);
                 if (topDatabaseQueryNum == numLocations) // We've added all of our locations; add our users
                 {
                     /* Add test users*/
@@ -289,13 +289,18 @@ module.exports = function (app) {
                         user.location = locationIds[i]; // Set the user's location ID
                         // save the user and check for errors
                         console.log('Creating User named "' + user.name + '"..');
+                        userIds.push(user.id);
                         user.save(function (err) {
                             if (err)
                                 res.send(err);
                             secondDatabaseQueryNum++;
                             if (secondDatabaseQueryNum == numUsers)
                             {
-                                res.send({ message: "Successfully completed creation of test users" });
+                                res.send({
+                                    message: "Successfully completed creation of test users",
+                                    locationIdList: locationIds,
+                                    userIdList: userIds
+                                });
                             }
                         });
                     }
