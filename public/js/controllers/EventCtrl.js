@@ -212,13 +212,15 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
                     return;
                 }
 
-                infoWindow.setContent("<b>" + result.name + "</b></br> " + result.formatted_address + '</br><button onclick="chooseLocation(' + result.geometry.location.lat() + ',' + result.geometry.location.lng() + ')">' + chooseButtonText + '</button>');
+                infoWindow.setContent("<b>" + result.name + "</b></br> " + result.formatted_address + '</br><button onclick="chooseLocation(\'' + result.name + '\',\'' + result.formatted_address + '\','+ result.geometry.location.lat() + ',' + result.geometry.location.lng() + ')">' + chooseButtonText + '</button>');
                 infoWindow.open(map, marker);
             });
         });
     }
 
-    chooseLocation = function(lat, long)
+    //Method used by the markers' 'choose location' button. 
+    // Returns the name, formated address, latitude, and longitude
+    chooseLocation = function(name, addr, lat, long)
     {
         $scope.myLocation = {
             latitude: lat,
