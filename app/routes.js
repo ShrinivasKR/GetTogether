@@ -13,20 +13,31 @@ module.exports = function (app) {
     //Create an event and return the event ID as a response
     app.post('/api/Event', function (req, res) {
         var event = new Event();
-        //event.Number = 1; // Events id's are auto-created
         event.date = req.body.date; // This will be a date object sent from body
-        event.location = mongoose.Types.ObjectId(req.body.location); // This will be an ID sent from body
+        /* Location stuff */
+        var loc = new Location();
+        loc.latitude = req.body.location.latitude;
+        loc.longitude = req.body.location.longitude;
 
-        event.save(function (err) {
-            console.log("Creating new event");
+        // save the user and check for errors
+        loc.save(function (err) {
             if (err)
                 res.send(err);
-            console.log("EventId: " + event.id);
-            res.json({
-                message: 'Event created!',
-                eventId: event.id
-            });
-        })
+
+            console.log('Location at <' + req.body.latitude + ', ' + req.body.longitude + '> created!');
+            event.location = loc.id; // Set our new Event's location equal to our new Location's ID
+            event.save(function (err) {
+                console.log("Creating new event");
+                if (err)
+                    res.send(err);
+                console.log("EventId: " + event.id);
+                res.json({
+                    message: 'Event created!',
+                    eventId: event.id
+                });
+            })
+        });
+        //event.location = mongoose.Types.ObjectId(req.body.location); // This will be an ID sent from body
     });
 
 
@@ -44,11 +55,58 @@ module.exports = function (app) {
         });
     });
 
-    app.get('/api/EventLocation', function (req, res) {
+    // This method returns an event location based on the users list that is sent.
+    // This method does not save anything, nor does it retrieve any event locations.
+    app.post('/api/EventLocation', function (req, res) 
+    {
+        console.log("Finding suggested location..");
+        if (req.body.users != null && req.body.users != []) {
+            var users = req.body.users;
+            var numUsers = users.length;
+            var databaseReturnCount = 0;
+            var locations = []; // Overall list of locations to average
+            var returnLocation = { latitude: 0, longitude: 0 }; // Loction to return at the end (must start at 0,0)
+            for (var i = 0; i < numUsers; i++) {
+                User.findOne({ '_id': users[i] }).populate("location").exec(function (err, user) {
+                    if (err) {
+                        databaseReturnCount++;
+                        console.log("ERROR: Could not find user: " + users[i]);
+                    }
+                    else {
+                        databaseReturnCount++;
+                        locations.push( user.location);
+                    }
 
-        res.json({ latitude: -33.8665433, longitude: 151.1956316 }); // Dummy response for location API
-
+                    if(databaseReturnCount == numUsers) // This will only execute after all users have been queried
+                    {
+                        returnLocation = suggestLocation(locations);
+                        res.json(returnLocation);
+                    }
+                });
+            }
+        }
+        else {
+            // Error return below:
+            res.json({
+                message: "Users list empty or not sent!",
+                latitude: null,
+                longitude: null
+            });
+        }
     });
+
+    function suggestLocation(locations)
+    {
+        console.log("Suggesting location..");
+        var returnLocation = { latitude: 0, longitude: 0 };
+        for (var i = 0; i < locations.length; i++) {
+            returnLocation.latitude += locations[i].latitude;
+            returnLocation.longitude += locations[i].longitude;
+        }
+        returnLocation.latitude /= locations.length;
+        returnLocation.longitude /= locations.length;
+        return returnLocation;
+    }
 
     app.get('/api/EventLocation/:event_ID', function (req, res) {
 
@@ -93,11 +151,11 @@ module.exports = function (app) {
                 // nothing after res.send(err) will execute
                 if (err) // This means that our location didn't exist
                     res.send(err); // This is effectively a 'return'
-
+                /*
                 console.log("Event: " + event);
                 console.log("Location: " + event.location);
-                console.log("Latitude: " + event.latitude);
-
+                console.log("Latitude: " + event.location.latitude);
+                */
                 res.json(event.location); // return single location in JSON format
             });
         }
@@ -135,6 +193,26 @@ module.exports = function (app) {
         });
     });
 
+    app.post('/api/Location', function (req, res) {
+
+        var loc = new Location();
+        loc.latitude = req.body.latitude;
+        loc.longitude = req.body.longitude;
+
+        // save the user and check for errors
+        loc.save(function (err) {
+            if (err)
+                res.send(err);
+
+            console.log('Location at <' + req.body.latitude + ', ' + req.body.longitude + '> created!');
+            res.json({
+                message: 'Location at <' + req.body.latitude + ', ' + req.body.longitude + '> created!',
+                locationId: loc.id
+            });
+        });
+
+    });
+
     // sample api route
     // This finds ALL users. Avoid using this.
     app.get('/api/users', function (req, res) {
@@ -154,6 +232,7 @@ module.exports = function (app) {
         
         var user = new User();      // create a new instance of the User model
         user.name = req.body.name;  // set the user's name (comes from the request)
+        user.location = req.body.location; // Set the user's location ID
 
         // save the user and check for errors
         user.save(function (err) {

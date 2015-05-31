@@ -44,19 +44,33 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     {
         // Create an example event
         var eventDate = $scope.mytime;
-
-        var locationID = '55621a44fc7fc4b006d34ca3';
         var event = {
             date: eventDate,
-            location: locationID
+            location: myLocation
 
         };
         eventFactory.createEvent(event);
     };
 
-    $scope.getEventLocation = function () // Should take paramaters
+    $scope.suggestLocation = function()
     {
-        var eventID = '55676b1a846524bc14f2efa2';
+        var usersData = ['556a4f80ecff2b7c03a2fa71', '556a4f88ecff2b7c03a2fa72', '556a4f8decff2b7c03a2fa73'];
+        eventFactory.suggestEventLocaiton(usersData)
+            .success(function (locationData) {
+                myLocation = locationData;
+                $scope.locationStatus = "Retrived Location: " + locationData.latitude + ", " + locationData.longitude;
+
+                //$scope.nerdData = nerdList;
+            })
+            .error(function (error) {
+                $scope.locationStatus = 'Unable to load location: ' + error.message;
+            });
+    }
+
+    $scope.getEventLocation = function () // Should probably take paramaters
+    {
+        
+        var eventID = '556a43bf27c78d1011059d2b';
         eventFactory.getEventLocation(eventID)
             .success(function (locationData) {
                 $scope.locationStatus = "Retrived Location: " + locationData.latitude + ", " + locationData.longitude;
