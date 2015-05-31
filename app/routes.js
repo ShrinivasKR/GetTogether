@@ -373,7 +373,7 @@ module.exports = function (app) {
                         user.name = users[i];  // set the user's name
                         user.location = locationIds[i]; // Set the user's location ID
                         // save the user and check for errors
-                        console.log('Creating User named "' + user.name + '"..');
+                        console.log('Creating User named "' + user.name + '", ID: ' + user.id +'..');
                         userIds.push(user.id);
                         user.save(function (err) {
                             if (err)

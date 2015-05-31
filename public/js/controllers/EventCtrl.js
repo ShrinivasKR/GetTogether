@@ -21,7 +21,7 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     $scope.eventName = {text:""};
     $scope.mytime = new Date(); // This will be the time used to create the final event 
     $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
-    $scope.userId = ['556b71583f426d0808e967ea']; // Example of our user creating the event
+    $scope.userId = ['556b9ac4b2e3b9ac0583d482']; // Example of our user creating the event
     $scope.userNames = ['Test User UW Bothell', 'Test User UW Seattle', 'Test User Everett']; // These example names live in database
     var usersData = ['']; // This becomes the list of IDs sent to the database, used to create the event
 
@@ -86,25 +86,32 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
 
     $scope.suggestLocation = function()
     {
-        eventFactory.suggestEventLocaiton(usersData)
-            .success(function (locationData) {
-                myLocation = locationData; // Set the event location here, for now.
-                
-                $scope.locationStatus = "Retrived Location: " + locationData.latitude + ", " + locationData.longitude;
+        eventFactory.verifyUsers($scope.userNames)
+            .success(function (userIDList) {
+                console.log("Retrived user IDs: " + userIDList);
+                usersData = userIDList;
+                eventFactory.suggestEventLocaiton(usersData)
+                .success(function (locationData) {
+                    myLocation = locationData; // Set the event location here, for now.
 
-                var pos = new google.maps.LatLng(locationData.latitude, locationData.longitude);
+                    $scope.locationStatus = "Retrived Location: " + locationData.latitude + ", " + locationData.longitude;
 
-                var infowindow = new google.maps.InfoWindow();
+                    var pos = new google.maps.LatLng(locationData.latitude, locationData.longitude);
 
-                map.setCenter(pos);
+                    var infowindow = new google.maps.InfoWindow();
 
-                infoWindow = new google.maps.InfoWindow();
-                service = new google.maps.places.PlacesService(map);
+                    map.setCenter(pos);
 
-                google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
-            })
-            .error(function (error) {
-                $scope.locationStatus = 'Unable to load location: ' + error.message;
+                    infoWindow = new google.maps.InfoWindow();
+                    service = new google.maps.places.PlacesService(map);
+
+                    google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+                })
+                .error(function (error) {
+                    $scope.locationStatus = 'Unable to load location: ' + error.message;
+                });
+            }).error(function (error) {
+                console.log('Unable to load users IDs: ' + error.message);
             });
     }
 

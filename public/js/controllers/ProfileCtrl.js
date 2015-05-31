@@ -6,7 +6,7 @@ angular.module('ProfileCtrl', ['ngMaterial', 'ngMessages']).controller('ProfileC
             password: 'Enter Password',
         };
 
-        $scope.userId = '556b71583f426d0808e967ea'; // hardcoded for now
+        $scope.userId = '556b9ac4b2e3b9ac0583d482'; // hardcoded for now
         $scope.username = "";
         $scope.myLocation = { latitude: null, longitude: null };
 
