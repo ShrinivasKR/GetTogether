@@ -8,7 +8,8 @@ var userSchema = new Schema({
     password: { type: String }, //                     |
     location: { type: Schema.ObjectId, ref: 'GPS' },// | 
     groups: { type: Array },  // Array of groups       |
-    schedule: { type: Array }// Array of Events        v
+    events: { type: Array },// Array of Events         v
+    schedule: { type: Array }
 })
 // define our user model
 // module.exports allows us to pass this to other files when it is called

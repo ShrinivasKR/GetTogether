@@ -18,7 +18,6 @@ module.exports = function (app) {
         loc.latitude = req.body.location.latitude;
         loc.longitude = req.body.location.longitude;
 
-        // save the user and check for errors
         loc.save(function (err) {
             if (err)
                 res.send(err);
@@ -37,11 +36,32 @@ module.exports = function (app) {
                 if (err)
                     res.send(err);
                 console.log("EventId: " + event.id);
-                res.json({
-                    message: 'Event created!',
-                    eventId: event.id
+            });
+
+            // Save the eventID to each of our attendees's event lists (and the creator ..!)
+            for (var i = 0; i < event.attendees.length; i++)
+            {
+                User.findOne({ '_id': event.attendees[i] }, function (err, user) {
+                    if (err) {
+                        console.log("ERROR adding event to user event list: " + err);
+                    }
+                    else {
+                        user.events.push(event.id);
+                        user.save(function (err) {
+                            if (err) {
+                                console.log("ERROR saving user after updating event list: " + err);
+                            }
+                            else {
+                                console.log("User updated!");
+                            }
+                        });
+                    }
                 });
-            })
+            }
+            res.json({
+                message: 'Event created!',
+                eventId: event.id
+            });
         });
         //event.location = mongoose.Types.ObjectId(req.body.location); // This will be an ID sent from body
     });
@@ -228,7 +248,15 @@ module.exports = function (app) {
 
     });
 
-    // sample api route
+    // This finds the user with user_ID
+    app.get('/api/users/:user_ID', function (req, res) {
+        User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
+            if (err)
+                res.send(err);
+            res.send(user);
+        });
+    });
+
     // This finds ALL users. Avoid using this.
     app.get('/api/users', function (req, res) {
         // use mongoose to get all users in the database
