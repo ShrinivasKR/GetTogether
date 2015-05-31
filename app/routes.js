@@ -251,30 +251,11 @@ module.exports = function (app) {
 
     // This finds the user with user_ID
     app.get('/api/users/:user_ID', function (req, res) {
-        // This method verifies the array of user names sent in the
-        //  body of the request, and returns an array of user IDs
-        if (req.params.user_ID == "verify")
-        {
-            console.log("Recieved Users List: " + req.body.users);
-            User.find({ 'name': { $in: req.body.users } }, function (err, userList) {
-                if (err)
-                    res.send(err);
-                var returnUserIDList = [];
-                console.log("Users List: " +userList);
-                for (var i = 0; i < userList.length; i++) {
-                    returnUserIDList.push(userList[i].id);
-                }
-                res.json(returnUserIDList);
-            });
-        }
-        else
-        {
-            User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
-                if (err)
-                    res.send(err);
-                res.send(user);
-            });
-        }
+        User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
+            if (err)
+                res.send(err);
+            res.send(user);
+        });
     });
 
     // This finds ALL users. Avoid using this.
@@ -309,6 +290,8 @@ module.exports = function (app) {
 
     // This method verifies the array of user names sent in the
     //  body of the request, and returns an array of user IDs
+    // This method also saves the users profile information, if
+    //  the user_ID is not 'verify' and returns the updated info
     app.post('/api/users/:user_ID', function (req, res) {
         if (req.params.user_ID == "verify") {
             console.log("Verifiying usernames: " + req.body.users);
@@ -320,6 +303,34 @@ module.exports = function (app) {
                     returnUserIDList.push(userList[i].id);
                 }
                 res.json(returnUserIDList);
+            });
+        }
+        else
+        {
+            User.findOne({ '_id': req.params.user_ID }, function (err, user) {
+                if (err)
+                    res.send(err);
+                else if (user == null) {
+                    res.json({ message: "Could not find user!" });
+                }
+                else {
+                    if (req.body.name != null && req.body.name != "")
+                        user.name = req.body.name;
+                    if (req.body.schedule != null && req.body.schedule != [] && req.body.schedule != "")
+                        user.schedule = req.body.schedule;
+                    if (req.body.location != null && req.body.location != "" && req.body.location.id != null)
+                        user.location = req.body.location.id;
+                    user.save(function (err) {
+                        if (err) {
+                            console.log("Could not update profile information: " + err);
+                            res.send(err);
+                        }
+                        else {
+                            console.log("Updated profile information for: " + user.id);
+                            res.json(user);
+                        }
+                    });
+                }
             });
         }
     });

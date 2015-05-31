@@ -8,10 +8,16 @@ angular.module('UserService', []).factory('UserFactory', ['$http', function($htt
         return $http.get(urlBase);
     },
 
+    // Gets the info of the user specified by the userId
+    userService.getUser = function (userId)
+    {
+        return $http.get(urlBase + "/" + userId);
+    },
+
     // call to POST and create a new user
     userService.createUser = function (userData) {
         return $http.post(urlBase, userData);
-    }
+    },
 
     // This method saves a user's info
     userService.saveProfile = function (userData) {
