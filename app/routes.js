@@ -25,7 +25,7 @@ module.exports = function (app) {
             console.log('Location at <' + loc.latitude + ', ' + loc.longitude + '> created!');
             /* Event Stuff*/
             var event = new Event();
-            if (req.body.name != null)
+            if (req.body.name != null && req.body.name != '')
                 event.name = req.body.name;
             event.location = loc.id; // Set our new Event's location equal to our new Location's ID
             event.date = req.body.date; // This will be a date object sent from body -- Maybe look for a suggested time!
