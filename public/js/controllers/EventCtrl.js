@@ -2,6 +2,17 @@
 angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventController', ["$scope", "EventFactory", function ($scope, eventFactory) {
     // stripped out: , 'ui.bootstrap'
 
+        $scope.date = new Date(); // This will be the time used to create the final event
+
+
+        $scope.setTime = function () {
+
+        }
+
+
+        
+    // stripped out: , 'ui.bootstrap'
+
     /* ======= Scope variables  ======= */
     $scope.user = {
         username: 'Enter Username',
@@ -216,6 +227,7 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
         var position = new google.maps.LatLng(lat, long)
         map.setCenter(position);
     }
+
 }])
 .config(function ($mdThemingProvider) {
 
