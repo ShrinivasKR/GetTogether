@@ -18,6 +18,12 @@
         return $http.get('/api/Event/' + eventID);
     }
 
+    eventService.verifyUsers = function(userNameList)
+    {
+        var params = { users: userNameList };
+        return $http.post('/api/users/verify', params);
+    }
+
     // This method will get the event location of a particular event
     eventService.getEventLocation = function (eventID) // This might need to change to event name, or something
     {

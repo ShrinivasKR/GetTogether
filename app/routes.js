@@ -251,11 +251,30 @@ module.exports = function (app) {
 
     // This finds the user with user_ID
     app.get('/api/users/:user_ID', function (req, res) {
-        User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
-            if (err)
-                res.send(err);
-            res.send(user);
-        });
+        // This method verifies the array of user names sent in the
+        //  body of the request, and returns an array of user IDs
+        if (req.params.user_ID == "verify")
+        {
+            console.log("Recieved Users List: " + req.body.users);
+            User.find({ 'name': { $in: req.body.users } }, function (err, userList) {
+                if (err)
+                    res.send(err);
+                var returnUserIDList = [];
+                console.log("Users List: " +userList);
+                for (var i = 0; i < userList.length; i++) {
+                    returnUserIDList.push(userList[i].id);
+                }
+                res.json(returnUserIDList);
+            });
+        }
+        else
+        {
+            User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
+                if (err)
+                    res.send(err);
+                res.send(user);
+            });
+        }
     });
 
     // This finds ALL users. Avoid using this.
@@ -286,6 +305,23 @@ module.exports = function (app) {
             res.json({ message: 'User named "' + req.body.name + '" created!' });
         });
         
+    });
+
+    // This method verifies the array of user names sent in the
+    //  body of the request, and returns an array of user IDs
+    app.post('/api/users/:user_ID', function (req, res) {
+        if (req.params.user_ID == "verify") {
+            console.log("Verifiying usernames: " + req.body.users);
+            User.find({ 'name': { $in: req.body.users } }, function (err, userList) {
+                if (err)
+                    res.send(err);
+                var returnUserIDList = [];
+                for (var i = 0; i < userList.length; i++) {
+                    returnUserIDList.push(userList[i].id);
+                }
+                res.json(returnUserIDList);
+            });
+        }
     });
 
     /* This area is for the automated tests */

@@ -21,9 +21,9 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     $scope.eventName = {text:""};
     $scope.mytime = new Date(); // This will be the time used to create the final event 
     $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
-    $scope.userId = ['556b52a9e7087fac0c825179']; // Example of our user creating the event
-    $scope.usersData = ['Test User UW Bothell', 'Test User UW Seattle', 'Test User Everett']; // These example names live in database
-    var usersData = ['556b52a9e7087fac0c82517a', '556b52a9e7087fac0c82517b', '556b52a9e7087fac0c82517c']; // Also example
+    $scope.userId = ['556b71583f426d0808e967ea']; // Example of our user creating the event
+    $scope.userNames = ['Test User UW Bothell', 'Test User UW Seattle', 'Test User Everett']; // These example names live in database
+    var usersData = ['']; // This becomes the list of IDs sent to the database, used to create the event
 
     $scope.hstep = 1;
     $scope.mstep = 15;
@@ -66,15 +66,22 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
 
     $scope.createEvent = function ()
     {
-        // Create an event
-        var event = {
-            name: $scope.eventName.text,
-            date: $scope.mytime,
-            location: $scope.myLocation,
-            users: usersData, // People attending
-            creator: $scope.userId // The person creating
-        };
-        eventFactory.createEvent(event);
+        eventFactory.verifyUsers($scope.userNames)
+            .success(function (userIDList) {
+                console.log("Retrived user IDs: " + userIDList);
+                usersData = userIDList;
+                // Create an event
+                var event = {
+                    name: $scope.eventName.text,
+                    date: $scope.mytime,
+                    location: $scope.myLocation,
+                    users: usersData, // People attending
+                    creator: $scope.userId // The person creating
+                };
+                eventFactory.createEvent(event);
+            }).error(function (error) {
+                console.log('Unable to load users IDs: ' + error.message);
+            });
     };
 
     $scope.suggestLocation = function()
@@ -126,6 +133,17 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
                 $scope.locationStatus = "Retrived Event: " + eventData.location.latitude;
             }).error(function (error) {
                 $scope.locationStatus = 'Unable to load event: ' + error.message;
+            });
+    }
+
+    $scope.verifyUsers = function()
+    {
+        eventFactory.verifyUsers($scope.userNames)
+            .success(function (userIDList) {
+                console.log("Retrived user IDs: " + userIDList);
+                usersData = userIDList;
+            }).error(function (error) {
+                console.log('Unable to load users IDs: ' + error.message);
             });
     }
 
