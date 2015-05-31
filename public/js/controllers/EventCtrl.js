@@ -18,6 +18,7 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
         username: 'Enter Username',
         password: 'Enter Password',
     };
+    $scope.eventName = {text:""};
     $scope.mytime = new Date(); // This will be the time used to create the final event 
     $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
     $scope.userId = ['556b52a9e7087fac0c825179']; // Example of our user creating the event
@@ -67,6 +68,7 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     {
         // Create an event
         var event = {
+            name: $scope.eventName.text,
             date: $scope.mytime,
             location: $scope.myLocation,
             users: usersData, // People attending

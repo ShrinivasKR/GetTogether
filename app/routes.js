@@ -25,6 +25,8 @@ module.exports = function (app) {
             console.log('Location at <' + loc.latitude + ', ' + loc.longitude + '> created!');
             /* Event Stuff*/
             var event = new Event();
+            if (req.body.name != null)
+                event.name = req.body.name;
             event.location = loc.id; // Set our new Event's location equal to our new Location's ID
             event.date = req.body.date; // This will be a date object sent from body -- Maybe look for a suggested time!
             event.creator = req.body.creator;
@@ -52,7 +54,7 @@ module.exports = function (app) {
                                 console.log("ERROR saving user after updating event list: " + err);
                             }
                             else {
-                                console.log("User updated!");
+                                console.log("User " + user.id + " updated!");
                             }
                         });
                     }
@@ -86,7 +88,6 @@ module.exports = function (app) {
         Event.findOne({ '_id': req.params.event_ID }).populate("location creator").exec(function (err, event) {
             if (err)
                 res.send(err);
-            console.log(event);
             res.json(event);
         });
     });
