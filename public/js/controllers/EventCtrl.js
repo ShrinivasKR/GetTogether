@@ -30,6 +30,7 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     var expanionNum = 0;
     var maxExpansionNum = 4;
     $scope.locationStatus = "Please enter users in order to auto-generate a place";
+    var chooseButtonText = "Choose this place!";
 
     /* ======= Scope functions ======= */
     $scope.toggleMode = function () {
@@ -67,17 +68,28 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     {
         eventFactory.suggestEventLocaiton(usersData)
             .success(function (locationData) {
-                myLocation = locationData;
+                myLocation = locationData; // Set the event location here, for now.
+                
                 $scope.locationStatus = "Retrived Location: " + locationData.latitude + ", " + locationData.longitude;
 
-                //$scope.nerdData = nerdList;
+                var pos = new google.maps.LatLng(locationData.latitude, locationData.longitude);
+
+                var infowindow = new google.maps.InfoWindow();
+
+                map.setCenter(pos);
+
+                infoWindow = new google.maps.InfoWindow();
+                service = new google.maps.places.PlacesService(map);
+
+                google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
             })
             .error(function (error) {
                 $scope.locationStatus = 'Unable to load location: ' + error.message;
             });
     }
 
-    /*$scope.getEventLocation = function () // Should probably take paramaters
+
+    $scope.getEventLocation = function () // Should probably take paramaters
     {
         
         var eventID = '556a43bf27c78d1011059d2b';
@@ -90,7 +102,120 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
             .error(function (error) {
                 $scope.locationStatus = 'Unable to load location: ' + error.message;
             });
-    };*/
+    };
+
+    /* ======= Maps functions ======= */
+
+    $scope.initialize = function () {
+        var mapOptions = { zoom: initialZoom };
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        //getPosition();
+    }
+
+    function getPosition() {
+        eventFactory.getEventLocation('556a76819db8d8f0102ef159') // Random temp ID
+            .success(function (location) {
+                $scope.locationStatus = "Retrieving location..";
+
+                var pos = new google.maps.LatLng(location.latitude, location.longitude);
+
+                var infowindow = new google.maps.InfoWindow();
+
+                map.setCenter(pos);
+
+                infoWindow = new google.maps.InfoWindow();
+                service = new google.maps.places.PlacesService(map);
+                $scope.locationStatus = "Marking nearby locations.."
+                google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+            })
+            .error(function (error) {
+                $scope.locationStatus = 'Unable to retrieve location: ' + error.message;
+            });
+
+    }
+
+    function performSearch() {
+        expanionNum++;
+        var typesList = ['library', 'cafe'];
+        var radius = 5000;
+        switch (expanionNum) {
+            case 1:
+                radius = 5000;
+                break;
+            case 2:
+                radius = 10000;
+                break;
+            case 3:
+                radius = 25000;
+                break;
+            case 4:
+                radius = 35000;
+                break;
+            case 5:
+                radius = 50000;
+                typesList += ['city_hall', 'park', 'establishment', 'food', 'night_club'];
+                break;
+            default:
+                expansionNum = maxExpansionNum + 1; // Uhoh. Ensure we're past max num
+        }
+        var request =
+        {
+            bounds: map.getBounds(),
+            radius: '' + radius, // dirty string conversion
+            types: typesList
+
+        };
+        //service.radarSearch(request, callback); // Radar search gets us more options with less variety
+        service.nearbySearch(request, callback);
+    }
+
+    function callback(results, status) {
+        if (status != google.maps.places.PlacesServiceStatus.OK) {
+            console.log("Error: Unable to display search results: " + status);
+            if (expanionNum < maxExpansionNum) {
+                console.log("Expanding search paramaters..");
+                google.maps.event.addListenerOnce(map, 'bounds_changed', performSearch);
+                map.setZoom(map.getZoom() - zoomIncriment);
+            }
+            return;
+        }
+        map.setCenter(results[0].geometry.location);
+        for (var i = 0, result; result = results[i]; i++) // Iterates through results
+        {
+            createMarker(results[i]);
+        }
+    }
+
+    function createMarker(place) {
+        var marker = new google.maps.Marker(
+        {
+            map: map,
+            position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            service.getDetails(place, function (result, status) {
+                if (status != google.maps.places.PlacesServiceStatus.OK) {
+                    alert(status);
+                    return;
+                }
+
+                infoWindow.setContent("<b>" + result.name + "</b></br> " + result.formatted_address + '</br><button onclick="chooseLocation(' + result.geometry.location.lat() + ',' + result.geometry.location.lng() + ')">' + chooseButtonText + '</button>');
+                infoWindow.open(map, marker);
+            });
+        });
+    }
+
+    chooseLocation = function(lat, long)
+    {
+        $scope.myLocation = {
+            latitude: lat,
+            longitude: long
+        };
+        var position = new google.maps.LatLng(lat, long)
+        map.setCenter(position);
+    }
 }])
 .config(function ($mdThemingProvider) {
 
