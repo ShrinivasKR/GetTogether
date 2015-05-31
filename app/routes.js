@@ -12,8 +12,7 @@ module.exports = function (app) {
 
     //Create an event and return the event ID as a response
     app.post('/api/Event', function (req, res) {
-        var event = new Event();
-        event.date = req.body.date; // This will be a date object sent from body
+     
         /* Location stuff */
         var loc = new Location();
         loc.latitude = req.body.location.latitude;
@@ -24,8 +23,15 @@ module.exports = function (app) {
             if (err)
                 res.send(err);
 
-            console.log('Location at <' + req.body.latitude + ', ' + req.body.longitude + '> created!');
+            console.log('Location at <' + loc.latitude + ', ' + loc.longitude + '> created!');
+            /* Event Stuff*/
+            var event = new Event();
             event.location = loc.id; // Set our new Event's location equal to our new Location's ID
+            event.date = req.body.date; // This will be a date object sent from body -- Maybe look for a suggested time!
+            event.creator = req.body.creator;
+            event.attendees = req.body.users;
+
+            // Save our event
             event.save(function (err) {
                 console.log("Creating new event");
                 if (err)

@@ -22,7 +22,8 @@
         return $http.post('/api/Location', locationData);
     }
 
-    eventService.createEvent = function(eventData){
+    eventService.createEvent = function (eventData) {
+        console.log("Creating an event..");
         return $http.post('/api/Event', eventData);
     }
 
