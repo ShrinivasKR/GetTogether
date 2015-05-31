@@ -250,7 +250,59 @@ module.exports = function (app) {
         
     });
 
-    // route to handle delete goes here (app.delete)
+    /* This area is for the automated tests */
+    app.get('/api/automatedTests', function (req, res) {
+        console.log("Running automated tests..");
+        var userIds = [];
+        var locationIds = [];
+        /* Add test locations*/
+        var location1 = { latitude: 47.7594, longitude: -122.1911 }; // UW Bothell
+        var location2 = { latitude: 47.6550, longitude: -122.3080 }; // UW Seattle
+        var location3 = { latitude: 47.9633, longitude: -122.2006 }; // City of Everett
+        var locations = [location1, location2, location3];
+        var numLocations = locations.length;
+        var topDatabaseQueryNum = 0;
+        for (var l = 0; l < numLocations; l++)
+        {
+            var loc = new Location();
+            loc.latitude = locations[l].latitude;
+            loc.longitude = locations[l].longitude;
+
+            // save the user and check for errors
+            console.log('Creating Location at <' + loc.latitude + ', ' + loc.longitude + '>..');
+            loc.save(function (err)
+            {
+                if (err)
+                    res.send(err);
+
+                topDatabaseQueryNum++;
+                locationIds.push(loc.id);
+                if (topDatabaseQueryNum == numLocations) // We've added all of our locations; add our users
+                {
+                    /* Add test users*/
+                    var users = ["Test User UW Bothell", "Test User UW Seattle", "Test User Everett"];
+                    var numUsers = users.length;
+                    var secondDatabaseQueryNum = 0;
+                    for (var i = 0; i < numUsers; i++) { // Add some predetermined test users
+                        var user = new User();
+                        user.name = users[i];  // set the user's name
+                        user.location = locationIds[i]; // Set the user's location ID
+                        // save the user and check for errors
+                        console.log('Creating User named "' + user.name + '"..');
+                        user.save(function (err) {
+                            if (err)
+                                res.send(err);
+                            secondDatabaseQueryNum++;
+                            if (secondDatabaseQueryNum == numUsers)
+                            {
+                                res.send({ message: "Successfully completed creation of test users" });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
 
 	// frontend routes =========================================================
 	// route to handle all angular requests
