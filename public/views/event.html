@@ -11,8 +11,7 @@
 </md-tabs>
 
 <ng-switch on="data.selectedIndex" class="tabpanel-container">
-    <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()"
-         md-swipe-right="previous()">
+    <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
         <md-content layout-padding="" layout-sm="column" class="text-center">
             <form name="aboutEventForm">
                 <md-input-container flex>
@@ -21,13 +20,11 @@
                 </md-input-container>
             </form>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'"
-                           ng-click="showAdd($event)">Invite People
+                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'" ng-click="showAdd($event)">Invite People
                 </md-button>
             </p>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="inviteGroups" btn-radio="'Middle'"
-                           ng-click="showAdd($event)">Invite Groups
+                <md-button class="md-raised md-primary md-hue-3" ng-model="inviteGroups" btn-radio="'Middle'" ng-click="showAdd($event)">Invite Groups
                 </md-button>
             </p>
             <div class="btn-group">
@@ -39,17 +36,22 @@
     <!--http://simeonc.github.io/md-date-time/-->
     <!--reference on time-date-picker-->
     <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
-            <time-date-picker ng-model="dateValue"></time-date-picker>
+        <p>Start on Time, With 24 Hour: {{date | date:'yyyy/MM/dd HH:mm a'}}</p>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <time-date-picker ng-model="date" default-mode="time" display-twentyfour="true"></time-date-picker>
+            </div>
+        </div>
     </div>
     <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
         <!--Location stuff-->
         <p>{{ locationStatus }}</p>
-        <div id="map-canvas"></div> <!--This div controls the Map-->
+        <div id="map-canvas"></div>
+        <!--This div controls the Map-->
         <button ng-click="getEventLocation()">Get Location</button>
     </div>
     <!--    Persistant create event button on the bottom-->
-    <md-button class="md-accent md-raised md-hue-1 text-center" ng-click="createEvent()"
-               style="position: absolute; bottom: 0px; width: 100%;">
+    <md-button class="md-accent md-raised md-hue-1 text-center" ng-click="createEvent()" style="position: absolute; bottom: 0px; width: 100%;">
         Create Event
     </md-button>
 </ng-switch>
