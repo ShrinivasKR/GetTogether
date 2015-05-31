@@ -1,4 +1,4 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'mdDateTime', 'ui.bootstrap', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl', 'GroupsCtrl', 'EventCtrl', 'EventService', 'ProfileCtrl', 'SettingsCtrl']);
+var app = angular.module('StarterApp', ['ngMaterial', 'ngMdIcons', 'ngRoute', 'mdDateTime', 'ui.bootstrap', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService', 'LoginCtrl', 'GroupsCtrl', 'EventCtrl', 'EventService', 'ProfileCtrl', 'UserService', 'SettingsCtrl']);
 // stripped out: ,
 
 app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog', function ($scope, $mdBottomSheet, $mdSidenav, $mdDialog, $location, $log) {
