@@ -18,6 +18,7 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
         username: 'Enter Username',
         password: 'Enter Password',
     };
+    $scope.myUserName = "Test User";
     $scope.eventName = {text:""};
     $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
     $scope.userId = ''; // Example of our user creating the event
@@ -71,16 +72,21 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
                 $scope.userId = userID;
 
                 eventFactory.verifyUsers($scope.userNames)
-                .success(function (userIDList) {
-                    console.log("Retrived user IDs: " + userIDList);
-                    usersData = userIDList;
+                .success(function (usersList) {
+                    console.log("Retrived users info");
+                    usersData = usersList;
                     // Create an event
                     console.log('Date: ' + $scope.myTime.date);
+                    var userDataIDList = [];
+                    for (var i = 0; i < usersData.length; i++)
+                    {
+                        userDataIDList.push(usersData[i]._id);
+                    }
                     var event = {
                         name: $scope.eventName.text,
                         date: $scope.myTime.date,
                         location: $scope.myLocation,
-                        users: usersData, // People attending
+                        users: userDataIDList, // People attending
                         creator: $scope.userId // The person creating
                     };
                     eventFactory.createEvent(event).success(function (userIDList) {
@@ -100,10 +106,14 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     $scope.suggestLocation = function()
     {
         eventFactory.verifyUsers($scope.userNames)
-            .success(function (userIDList) {
-                console.log("Retrived user IDs: " + userIDList);
-                usersData = userIDList;
-                eventFactory.suggestEventLocaiton(usersData)
+            .success(function (userList) {
+                console.log("Retrived users info.");
+                usersData = userList;
+                var userDataIDList = [];
+                for (var i = 0; i < usersData.length; i++) {
+                    userDataIDList.push(usersData[i]._id);
+                }
+                eventFactory.suggestEventLocaiton(userDataIDList)
                 .success(function (locationData) {
                     myLocation = locationData; // Set the event location here, for now.
 
@@ -128,6 +138,71 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
             });
     }
 
+    $scope.suggestTime = function()
+    {
+        var useresToVerify = $scope.userNames;
+        useresToVerify.push($scope.myUserName);
+        eventFactory.verifyUsers(useresToVerify)
+            .success(function (usersList) {
+                usersData = usersList;
+                if (usersData != null && usersData[0].schedule != null)
+                {
+                    var tempSchedule = usersData[0].schedule; // Start with our 0 schedule
+                    for (var i = 1; i < usersData.length; i++) // Check the rest of the peoples' schedules
+                    {
+                        if (usersData[i].schedule == null || usersData[i].schedule == []) // Skip a scheudle if it's empty
+                            i++;
+
+                        for(var sNum = 0; sNum < usersData[i].schedule.length; sNum++) // Go through the entire schedule
+                        {
+                            if (usersData[i].schedule[sNum] == true) // True means that the scheudle is busy
+                            {
+                                tempSchedule[sNum] = true;
+                            }
+                        }
+                    }
+                    var keepGoing = true; // pseudo 'break' statement, because I wouldn't trust Javascript with my [insert joke]
+                    var scheduleStepper;
+                    for (scheduleStepper = 0; scheduleStepper < tempSchedule.length && keepGoing; scheduleStepper++)
+                    {
+                        if (tempSchedule[scheduleStepper] != true)
+                        {
+                            keepGoing = false;
+                        }
+                    }
+                    var dayVar = scheduleStepper % 7;
+                    var timeOfDayVar = Math.floor(scheduleStepper / 7); // Equivlent of integer division (there is no int in javascript). Of course there isn't.
+                    console.log(usersData);
+                    console.log(tempSchedule);
+                    console.log(usersData[3].schedule);
+                    console.log("ScheduleStepper: " + scheduleStepper + ", DAY: " + dayVar + ", TIME: " + timeOfDayVar);
+
+                    var reccDate = new Date(); //Today's date
+                    // Account for Saturday:
+                    dayVar--;
+                    if (dayVar == -1)
+                        dayVar = 6; // Saturday should be day 6
+
+                    dayVar = dayVar - reccDate.getDay();
+
+                    if (dayVar < 1) // Acount for days earlier in the week than currentDate
+                    {
+                        dayVar += 7;
+                    }
+
+                    reccDate.setUTCHours(reccDate.getUTCHours() + (dayVar * 24));
+                    reccDate.setMinutes(0);
+                    var hours = 6 + timeOfDayVar;
+                    
+                    reccDate.setHours(hours);
+                    console.log(reccDate.toLocaleString());
+
+                    $scope.myTime.date = reccDate;
+                }
+            }).error(function (error) {
+                console.log("Could not verify users: " + error);
+            });
+    }
 
     $scope.getEventLocation = function () // Should probably take paramaters
     {
