@@ -1,0 +1,13 @@
+Download TeamKey.pem from Dropbox to the current directory. Keep TeamKey.pem private. It grants access to our server instance.
+
+Mac OS/Linux instructions:
+
+	Open Terminal:
+		Run the command:
+			chmod 600 TeamKey.pem
+		Note: Otherwise, Mac OS Terminal gives a “Permissions 0640 for 'TeamKey.pem' are too open.” when using SSH.
+
+		SSH into our server instance running on Amazon Web Services (AWS):
+			ssh -v -i TeamKey.pem ec2-user@ec2-52-25-81-60.us-west-2.compute.amazonaws.com
+
+// Search for TeamKey.pem in Dropbox. The .pem file cannot be downloaded from AWS after a server instance has been created.
