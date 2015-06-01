@@ -1,4 +1,4 @@
-These instructions apply to Windows 7 and Mac OS.
+These instructions apply to Windows 7, Mac OS, and Amazon Web Services.
 
 Install Git
 	http://git-scm.com/book/en/v2/Getting-Started-Installing-Git
@@ -49,6 +49,9 @@ Run MongoDB
 			mongod
 		Optional: Start the MongoDB console to run commands
 			mongo
+	On Amazon Linux AMI:
+		Inside Bash, start MongoDB
+			sudo /etc/rc.d/init.d/mongod start
 Start the Node.js server in the project root-directory meanGetTogether
 	node server.js
 Open a Web browser (such as Firefox, Internet Explorer, Safari, Chrome) to the following URL:
