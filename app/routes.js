@@ -42,9 +42,11 @@ module.exports = function (app) {
             });
 
             // Save the eventID to each of our attendees's event lists (and the creator ..!)
-            for (var i = 0; i < event.attendees.length; i++)
+            var usersToSaveTheEventTo = event.attendees;
+            usersToSaveTheEventTo.push(event.creator);
+            for (var i = 0; i < usersToSaveTheEventTo.length; i++)
             {
-                User.findOne({ '_id': event.attendees[i] }, function (err, user) {
+                User.findOne({ '_id': usersToSaveTheEventTo[i] }, function (err, user) {
                     if (err) {
                         console.log("ERROR adding event to user event list: " + err);
                     }
@@ -251,6 +253,7 @@ module.exports = function (app) {
     });
 
     // This finds the user with user_ID
+    // Also used to find the ID of the testuser
     app.get('/api/users/:user_ID', function (req, res) {
 
         if (req.params.user_ID == "TestUser")
@@ -267,7 +270,7 @@ module.exports = function (app) {
                     res.json({ message: "Could not find Test User ID!" });
                 }
                 else {
-                    console.log(user);
+                    console.log("Test user found!");
                     res.send(user.id);
                 }
             });
