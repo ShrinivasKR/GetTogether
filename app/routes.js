@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-var Location = require('./models/gps');
-var Event = require('./models/event');
-var User = require('./models/user');
-var Group = require('./models/group');
+var Location = require('./models/GPS');
+var Event = require('./models/Event');
+var User = require('./models/User');
+var Group = require('./models/Group');
 var testUserName = "Test User";
 
 module.exports = function (app) {
