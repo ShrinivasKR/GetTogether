@@ -255,10 +255,21 @@ module.exports = function (app) {
 
         if (req.params.user_ID == "TestUser")
         {
-            User.findOne({ 'name': testUserName }, function (err, location) {
-                if (err)
+            console.log("Find TestUser..");
+            User.findOne({ 'name': testUserName }, function (err, user) {
+                if (err) {
+                    console.log("ERROR finding Test User: " + err);
                     res.send(err);
-                res.send(user);
+                }
+                else if(user == null || user.id == null)
+                {
+                    console.log("ERROR finding Test User ID!");
+                    res.json({ message: "Could not find Test User ID!" });
+                }
+                else {
+                    console.log(user);
+                    res.send(user.id);
+                }
             });
         }
         else

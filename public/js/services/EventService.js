@@ -43,7 +43,7 @@
     // Returns the id of the TestUser
     eventService.getSelf = function ()
     {
-        return $http.get(urlBase+"/TestUser");
+        return $http.get('api/users/TestUser');
     }
 
     return eventService;

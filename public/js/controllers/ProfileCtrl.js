@@ -66,11 +66,13 @@ angular.module('ProfileCtrl', ['ngMaterial', 'ngMessages']).controller('ProfileC
                 userFactory.getUser($scope.userId)
                 .success(function (userInfo) {
                     $scope.username = userInfo.name;
-                    $scope.Times = userInfo.schedule;
-                    $scope.myLocation = userInfo.location;
-                    for (i = 0; i < $scope.TimesLength; i++) {
-                        $scope.initColor('normalPriorityButton' + (i + 1), i);
+                    if (userInfo.schedule != null) {
+                        $scope.Times = userInfo.schedule;
+                        for (i = 0; i < $scope.TimesLength; i++) {
+                            $scope.initColor('normalPriorityButton' + (i + 1), i);
+                        }
                     }
+                    $scope.myLocation = userInfo.location;
                     console.log(userInfo);
                 }).error(function (error) {
                     console.log('Could not get User Info: ' + error.message);
