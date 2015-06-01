@@ -21,11 +21,12 @@ angular.module('MainCtrl', []).controller('MainController', ["$scope", "UserFact
 	    $scope.activity = [];
 	    for(var i = 0; i < eventsList.length; i++)
 	    {
+	        var eventDate = new Date(eventsList[i].date);
 	        var item = {
 	            what: eventsList[i].name,
 	            who: eventsList[i].creator.name,
-	            when: '0:00',
-	            notes: 'No notes'
+	            when: '----',
+	            notes: eventDate.toLocaleString()
 	        };
 	        if (eventsList[i].creator.name == $scope.username)
 	        {
