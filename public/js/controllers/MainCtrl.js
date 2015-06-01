@@ -23,11 +23,11 @@ angular.module('MainCtrl', []).controller('MainController', ["$scope", "UserFact
 	    {
 	        var item = {
 	            what: eventsList[i].name,
-	            who: 'You',
+	            who: eventsList[i].creator.name,
 	            when: '0:00',
 	            notes: 'No notes'
 	        };
-	        if (eventsList.creator == $scope.username)
+	        if (eventsList[i].creator.name == $scope.username)
 	        {
 	            item.who = 'You';
 	        }
@@ -55,7 +55,6 @@ angular.module('MainCtrl', []).controller('MainController', ["$scope", "UserFact
                     $scope.activity = fakeActivity;
                 }
                 console.log(userInfo);
-                console.log(userInfo.events[0].name);
             }).error(function (error) {
                 console.log('Could not get User Info: ' + error.message);
             });

@@ -1,5 +1,5 @@
 //, 'rgkevin.datetimeRangePicker', 'vr.directives.slider', 'ngTouch'], [require('angular-touch')]
-angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventController', ["$scope", "EventFactory", function ($scope, eventFactory) {
+angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventController', ["$scope", '$location',"EventFactory", function ($scope, $location, eventFactory) {
     // stripped out: , 'ui.bootstrap'
 
         $scope.date = new Date(); // This will be the time used to create the final event
@@ -83,7 +83,12 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
                         users: usersData, // People attending
                         creator: $scope.userId // The person creating
                     };
-                    eventFactory.createEvent(event);
+                    eventFactory.createEvent(event).success(function (userIDList) {
+                        $location.path('/dashboard');
+                    }).error(function (error) {
+                        console.log('Could not get save event: ' + error.message);
+                        $location.path('/dashboard');
+                    });
                 }).error(function (error) {
                     console.log('Unable to load users IDs: ' + error.message);
                 });

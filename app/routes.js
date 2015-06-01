@@ -280,7 +280,7 @@ module.exports = function (app) {
             User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
                 if (err)
                     res.send(err);
-                Event.find({ '_id': { $in: user.events } }, function (err, eventsList) {
+                Event.find({ '_id': { $in: user.events } }).populate("creator").exec(function (err, eventsList) {
                     if (err)
                         res.send(err);
                     user.events = eventsList;
