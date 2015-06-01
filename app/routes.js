@@ -277,10 +277,16 @@ module.exports = function (app) {
         }
         else
         {
+            var databaseCounter = 0;
             User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
                 if (err)
                     res.send(err);
-                res.send(user);
+                Event.find({ '_id': { $in: user.events } }, function (err, eventsList) {
+                    if (err)
+                        res.send(err);
+                    user.events = eventsList;
+                    res.json(user);
+                });
             });
         }
     });
