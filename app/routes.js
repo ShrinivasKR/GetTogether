@@ -332,7 +332,7 @@ module.exports = function (app) {
                     res.send(err);
                 var returnUserIDList = [];
                 for (var i = 0; i < userList.length; i++) {
-                    returnUserIDList.push(userList[i].id);
+                    returnUserIDList.push(userList[i]);
                 }
                 res.json(returnUserIDList);
             });
