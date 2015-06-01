@@ -36,10 +36,10 @@
     <!--http://simeonc.github.io/md-date-time/-->
     <!--reference on time-date-picker-->
     <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
-        <p>Start on Time, With 24 Hour: {{date | date:'yyyy/MM/dd HH:mm a'}}</p>
+        <p>Start on Time, With 24 Hour: {{myTime.date | date:'yyyy/MM/dd HH:mm a'}}</p>
         <div class="modal-dialog">
             <div class="modal-content">
-                <time-date-picker ng-model="date" default-mode="time" display-twentyfour="true"></time-date-picker>
+                <time-date-picker ng-model="myTime.date" default-mode="time" display-twentyfour="true"></time-date-picker>
             </div>
         </div>
     </div>

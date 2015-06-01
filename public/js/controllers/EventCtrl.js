@@ -2,12 +2,12 @@
 angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventController', ["$scope", '$location',"EventFactory", function ($scope, $location, eventFactory) {
     // stripped out: , 'ui.bootstrap'
 
-        $scope.date = new Date(); // This will be the time used to create the final event
+    $scope.myTime = { date: new Date() }; // This will be the time used to create the final event
 
 
-        $scope.setTime = function () {
+    $scope.setTime = function () {
 
-        }
+    }
 
 
         
@@ -19,7 +19,6 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
         password: 'Enter Password',
     };
     $scope.eventName = {text:""};
-    $scope.mytime = new Date(); // This will be the time used to create the final event 
     $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
     $scope.userId = ''; // Example of our user creating the event
     $scope.fullUsersList = [];
@@ -76,9 +75,10 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
                     console.log("Retrived user IDs: " + userIDList);
                     usersData = userIDList;
                     // Create an event
+                    console.log('Date: ' + $scope.myTime.date);
                     var event = {
                         name: $scope.eventName.text,
-                        date: $scope.mytime,
+                        date: $scope.myTime.date,
                         location: $scope.myLocation,
                         users: usersData, // People attending
                         creator: $scope.userId // The person creating
