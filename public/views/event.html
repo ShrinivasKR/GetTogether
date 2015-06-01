@@ -18,9 +18,15 @@
                     <label>Name of Event</label>
                     <input ng-model="eventName.text">
                 </md-input-container>
+<!--
+                 <md-input-container flex>
+                    <label>{{fullUsersList[0].name}}</label>
+                     <input ng-model="eventName.text">
+                </md-input-container>
+-->
             </form>
             <p>
-                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'" ng-click="showAdd($event)">Invite People
+                <md-button class="md-raised md-primary md-hue-3" ng-model="invitePeople" btn-radio="'Middle'" ng-click="showPeople($event)">Invite People
                 </md-button>
             </p>
             <p>
