@@ -6,7 +6,7 @@ angular.module('ProfileCtrl', ['ngMaterial', 'ngMessages']).controller('ProfileC
             password: 'Enter Password',
         };
 
-        $scope.userId = '556b9ac4b2e3b9ac0583d482'; // hardcoded for now
+        $scope.userId = '';
         $scope.username = "";
         $scope.myLocation = { latitude: null, longitude: null };
 
@@ -60,18 +60,23 @@ angular.module('ProfileCtrl', ['ngMaterial', 'ngMessages']).controller('ProfileC
         
         $scope.getUserInfo = function()
         {
-            userFactory.getUser($scope.userId)
-            .success(function (userInfo) {
-                $scope.username = userInfo.name;
-                $scope.Times = userInfo.schedule;
-                $scope.myLocation = userInfo.location;
-                for (i = 0; i < $scope.TimesLength; i++)
-                {
-                    $scope.initColor('normalPriorityButton' + (i + 1), i);
-                }
-                console.log(userInfo);
+            userFactory.getSelf()
+            .success(function (userID) {
+                $scope.userId = userID;
+                userFactory.getUser($scope.userId)
+                .success(function (userInfo) {
+                    $scope.username = userInfo.name;
+                    $scope.Times = userInfo.schedule;
+                    $scope.myLocation = userInfo.location;
+                    for (i = 0; i < $scope.TimesLength; i++) {
+                        $scope.initColor('normalPriorityButton' + (i + 1), i);
+                    }
+                    console.log(userInfo);
+                }).error(function (error) {
+                    console.log('Could not get User Info: ' + error.message);
+                });
             }).error(function (error) {
-                console.log('Could not get User Info: ' + error.message);
+                console.log('Could not get User ID: ' + error.message);
             });
         }
 

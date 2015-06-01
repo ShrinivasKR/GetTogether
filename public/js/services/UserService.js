@@ -14,6 +14,12 @@ angular.module('UserService', []).factory('UserFactory', ['$http', function($htt
         return $http.get(urlBase + "/" + userId);
     },
 
+    // Returns the id of the TestUser
+    userService.getSelf = function ()
+    {
+        return $http.get(urlBase+"/TestUser");
+    },
+
     // call to POST and create a new user
     userService.createUser = function (userData) {
         return $http.post(urlBase, userData);

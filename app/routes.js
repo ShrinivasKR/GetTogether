@@ -3,6 +3,7 @@ var Location = require('./models/gps');
 var Event = require('./models/event');
 var User = require('./models/user');
 var Group = require('./models/group');
+var testUserName = "Test User";
 
 module.exports = function (app) {
 
@@ -251,11 +252,23 @@ module.exports = function (app) {
 
     // This finds the user with user_ID
     app.get('/api/users/:user_ID', function (req, res) {
-        User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
-            if (err)
-                res.send(err);
-            res.send(user);
-        });
+
+        if (req.params.user_ID == "TestUser")
+        {
+            User.findOne({ 'name': testUserName }, function (err, location) {
+                if (err)
+                    res.send(err);
+                res.send(user);
+            });
+        }
+        else
+        {
+            User.findOne({ '_id': req.params.user_ID }).populate("location").exec(function (err, user) {
+                if (err)
+                    res.send(err);
+                res.send(user);
+            });
+        }
     });
 
     // This finds ALL users. Avoid using this.
@@ -365,7 +378,7 @@ module.exports = function (app) {
                 if (topDatabaseQueryNum == numLocations) // We've added all of our locations; add our users
                 {
                     /* Add test users*/
-                    var users = ["Test User","Test User UW Bothell", "Test User UW Seattle", "Test User Everett"];
+                    var users = [testUserName, "Test User UW Bothell", "Test User UW Seattle", "Test User Everett"];
                     var numUsers = users.length;
                     var secondDatabaseQueryNum = 0;
                     for (var i = 0; i < numUsers; i++) { // Add some predetermined test users
