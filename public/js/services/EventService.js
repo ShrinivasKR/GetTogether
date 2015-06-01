@@ -18,6 +18,11 @@
         return $http.get('/api/Event/' + eventID);
     },
 
+    eventService.getAllUsers = function()
+    {
+        return $http.get('/api/users');
+    }
+
     eventService.verifyUsers = function(userNameList)
     {
         var params = { users: userNameList };

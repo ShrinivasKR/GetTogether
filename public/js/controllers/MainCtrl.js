@@ -1,6 +1,6 @@
 angular.module('MainCtrl', []).controller('MainController', ["$scope", "UserFactory", function ($scope, userFactory) {
 
-	$scope.tagline = 'To the moon and back!';	
+	//$scope.tagline = 'To the moon and back!';	
 
     /*$scope.activity; is the dashboard list
             what: 'Recipe to try',
@@ -8,6 +8,7 @@ angular.module('MainCtrl', []).controller('MainController', ["$scope", "UserFact
             when: '3:08PM',
             notes: "We should eat this: Grapefruit, Squash, Corn, and Tomatillo tacos"
     */
+    $scope.username = "";
 	$scope.activity = [];
 	$scope.activity.push({
 	    what: 'Loading events..',
@@ -20,14 +21,17 @@ angular.module('MainCtrl', []).controller('MainController', ["$scope", "UserFact
 	    $scope.activity = [];
 	    for(var i = 0; i < eventsList.length; i++)
 	    {
-	        /* THIS WONT WORK UNTIL YOU ATUALLY GET THE INFO OF THE EVENTS-- YOU ONLY HAVE IDS*/
-            // Use populate in User get method
-	        $scope.activity.push({
+	        var item = {
 	            what: eventsList[i].name,
-	            who: 'YOU!',
+	            who: 'You',
 	            when: '0:00',
 	            notes: 'No notes'
-	        });
+	        };
+	        if (eventsList.creator == $scope.username)
+	        {
+	            item.who = 'You';
+	        }
+	        $scope.activity.push(item);
 	    }
 	}
 
@@ -39,6 +43,7 @@ angular.module('MainCtrl', []).controller('MainController', ["$scope", "UserFact
             .success(function (userInfo)
             {
                 console.log("User info found..");
+                $scope.username = userInfo.name;
                 if (userInfo.events != null)
                 {
                     console.log("Populating events..");

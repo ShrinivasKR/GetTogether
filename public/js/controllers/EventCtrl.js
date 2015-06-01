@@ -22,6 +22,7 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
     $scope.mytime = new Date(); // This will be the time used to create the final event 
     $scope.myLocation = { latitude: null, longitude: null }; // As above, for the location
     $scope.userId = ''; // Example of our user creating the event
+    $scope.fullUsersList = [];
     $scope.userNames = ['Test User UW Bothell', 'Test User UW Seattle', 'Test User Everett']; // These example names live in database
     var usersData = ['']; // This becomes the list of IDs sent to the database, used to create the event
 
@@ -160,6 +161,19 @@ angular.module('EventCtrl', ['ngMaterial', 'ngMessages']).controller('EventContr
                 console.log('Unable to load users IDs: ' + error.message);
             });
     }
+
+    $scope.getAllUsers = function()
+    {
+        eventFactory.getAllUsers($scope.userNames)
+            .success(function (usersList) {
+                console.log("Retrived all users");
+                $scope.fullUsersList = usersList;
+            }).error(function (error) {
+                console.log('Unable to load all users: ' + error.message);
+            });
+    }
+
+    $scope.getAllUsers();
 
     /* ======= Maps functions ======= */
 
