@@ -36,12 +36,12 @@ Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Open Termi
 			Change directory to meanGetTogether folder
 				cd somepath\meanGetTogether
 			Install bower, method-override, body-parser, express, and mongoose
-				npm install -g bower && npm install && bower install
+				npm install -g bower && npm install && bower install && npm install passport passport-auth0 --save
 		Linux:
 			Change directory to meanGetTogether folder
 				cd somepath\meanGetTogether
 			Install bower, method-override, body-parser, express, and mongoose
-				sudo npm install -g bower && npm install && bower install
+				sudo npm install -g bower && npm install && bower install && npm install passport passport-auth0 --save
 Run MongoDB
 	On Windows:
 		Inside Command Prompt, change to MongoDB binaries folder
