@@ -24,12 +24,11 @@ Install MongoDB
 			sudo chown 'whoami' /data/db
 			Note: 'whoami' is your user name
 		Add mongodb/bin to $PATH
-			cd ~
-         		vim .bash_profile
-				Now save into those files these 2 following lines:
+         		vim ~./bash_profile
+				Copy and save into this file the following 2 lines:
 					export MONGO_PATH=/usr/local/mongodb
 					export PATH=$PATH:$MONGO_PATH/bin 
-	MongoDB will look in the C:\data\db\ directory by default for data in Windows (/data/db on Mac OS)
+	Note: MongoDB will look in the C:\data\db\ directory by default for data in Windows (/data/db on Mac OS)
 Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Open Terminal in Mac OS by pressing command key and spacebar, then typing "terminal".)
 	Inside Node.js Command Prompt
 		Windows:
