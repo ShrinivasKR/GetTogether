@@ -35,21 +35,19 @@ Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Open Termi
 		Windows:
 			Change directory to meanGetTogether folder
 				cd somepath\meanGetTogether
-			Install bower, method-override, body-parser, express, and mongoose
+			Install bower, method-override, body-parser, express, mongoose, and passport
 				npm install -g bower && npm install && bower install && npm install passport passport-auth0 --save
 		Linux:
 			Change directory to meanGetTogether folder
 				cd somepath\meanGetTogether
-			Install bower, method-override, body-parser, express, and mongoose
+			Install bower, method-override, body-parser, express, mongoose, and passport
 				sudo npm install -g bower && npm install && bower install && npm install passport passport-auth0 --save
 Run MongoDB
 	On Windows:
-		Inside Command Prompt, change to MongoDB binaries folder
-			cd C:\Program Files\MongoDB\Server\3.0\bin
-		Start the database daemon
-			mongod.exe
-		Optional: Start the MongoDB console to run commands
-			mongo.exe
+		Inside Command Prompt, start the Mongo database daemon
+			"C:\Program Files\MongoDB\Server\3.0\bin\mongod.exe"
+		Optional: Start the Mongo database console to run commands
+			"C:\Program Files\MongoDB\Server\3.0\bin\mongo.exe"
 	On Mac OS:
 		Inside Terminal, start MongoDB
 			mongod
