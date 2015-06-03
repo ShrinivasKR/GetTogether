@@ -11,7 +11,8 @@ Install MongoDB
 	On Windows:
 		Download and install MongoDB
 			https://www.mongodb.org/downloads
-		Create the folder structure: C:\data\db\
+		Make this directory
+                        mkdir C:\data\db\
 	On Mac OS:
 		Download MongoDB
 			https://www.mongodb.org/downloads
