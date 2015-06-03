@@ -13,6 +13,7 @@
 
 <body layout="row" ng-controller="AppCtrl">
     <div layout="row" flex class="content-wrapper">
+
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
             <md-toolbar class="md-tall md-hue-2">
                 <span flex></span>
@@ -50,7 +51,6 @@
                 </md-item>
             </md-list>
         </md-sidenav>
-
         <div layout="column" class="relative content-wrapper" layout-fill role="main" id="primary-col">
             <md-toolbar ng-sh ow="!showSearch">
                 <div class="md-toolbar-tools">
@@ -64,6 +64,26 @@
                     <md-button aria-label="Search" ng-click="showSearch = !showSearch">
                         <ng-md-icon icon="search"></ng-md-icon>
                     </md-button>
+                    <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+                        <ng-md-icon icon="more_vert"></ng-md-icon>
+                    </md-button>
+                    <script src="https://cdn.auth0.com/js/lock-7.1.min.js"></script>
+                    <script type="text/javascript">
+
+                      var lock = new Auth0Lock('DvVb0iJIFk7b9xr9hDVk6IyGflK4CI1C', 'gettogetherusers.auth0.com');
+
+
+                      function signin() {
+                        lock.show({
+                          callbackURL: 'http://localhost:8080/callback'
+                          , responseType: 'code'
+                          , authParams: {
+                            scope: 'openid profile'
+                          }
+                        });
+                      }
+                      </script>
+                      <button onclick="signin()">Login</button>
                 </div>
 
             </md-toolbar>

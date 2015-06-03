@@ -83,21 +83,7 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdSidenav', '$mdDialog'
                 $scope.alert = 'You cancelled the dialog.';
             });
     };
-    $scope.showPeople = function (ev) {
-        $mdDialog.show({
-                controller: DialogController,
-                template: '<md-dialog aria-label="Mango (Fruit)"> <md-content class="md-padding"> <label>Search: <input ng-model="searchText"></label><table id="searchTextResults"> <tr> <th>Name</th> </tr><tr ng-repeat="user in fullUsersList | filter:searchText"> <td>{{user.name}}</td></tr></table><hr><label>Any: <input ng-model="search.$"></label><br><label>Name only <input ng-model="search.name"></label><br><br><table id="searchObjResults"> <tr> <th>Name</th> </tr><tr ng-repeat="userObj in fullUsersList | filter:search:strict"> <td>{{userObj.name}}</td></tr></table> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="answer(\'not useful\')"> Cancel </md-button> <md-button ng-click="answer(\'useful\')" class="md-primary"> Save </md-button> </div></md-dialog>',
-                targetEvent: ev,
-            })
-            .then(function (answer) {
-                $scope.alert = 'You said the information was "' + answer + '".';
-            }, function () {
-                $scope.alert = 'You cancelled the dialog.';
-            });
-    };
 }]);
-
-
 
 app.controller('ListBottomSheetCtrl', function ($scope, $mdBottomSheet) {
     $scope.items = [
