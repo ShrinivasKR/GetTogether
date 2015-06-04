@@ -11,12 +11,12 @@ Install MongoDB
 	On Windows:
 		Download and install MongoDB
 			https://www.mongodb.org/downloads
-		Make this directory
+		Inside Command Prompt, make this directory
                         mkdir C:\data\db\
 	On Mac OS:
 		Download MongoDB
 			https://www.mongodb.org/downloads
-		Extract mongodb
+		Inside Terminal, extract mongodb
 			cd ~/Downloads
 			sudo mv mongodb-osx-x86_64-3.0.3 /usr/local/mongodb
 		Make this directory
@@ -31,17 +31,16 @@ Install MongoDB
 					export PATH=$PATH:$MONGO_PATH/bin 
 	Note: MongoDB will look in the C:\data\db\ directory by default for data in Windows (/data/db on Mac OS)
 Run Node.js Command Prompt (Node.js Command Prompt exists on Windows. Open Terminal in Mac OS by pressing command key and spacebar, then typing "terminal".)
-	Inside Node.js Command Prompt
-		Windows:
-			Change directory to meanGetTogether folder
-				cd somepath\meanGetTogether
-			Install bower, method-override, body-parser, express, mongoose, and passport
-				npm install -g bower && npm install && bower install && npm install passport passport-auth0 --save
-		Linux:
-			Change directory to meanGetTogether folder
-				cd somepath\meanGetTogether
-			Install bower, method-override, body-parser, express, mongoose, and passport
-				sudo npm install -g bower && npm install && bower install && npm install passport passport-auth0 --save
+	On Windows:
+		Inside Node.js command prompt, change directory to meanGetTogether folder
+			cd somepath\meanGetTogether
+		Install bower, method-override, body-parser, express, mongoose, and passport
+			npm install -g bower && npm install && bower install && npm install passport passport-auth0 --save
+	On Linux:
+		Inside Bash, change directory to meanGetTogether folder
+			cd somepath\meanGetTogether
+		Install bower, method-override, body-parser, express, mongoose, and passport
+			sudo npm install -g bower && npm install && bower install && npm install passport passport-auth0 --save
 Run MongoDB
 	On Windows:
 		Inside Command Prompt, start the Mongo database daemon
