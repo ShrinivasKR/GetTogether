@@ -42,7 +42,7 @@
                 <time-date-picker ng-model="myTime.date" default-mode="time" display-twentyfour="true"></time-date-picker>
             </div>
         </div>
-        <md-button class="md-raised md-primary md-hue-3" ng-click="suggestTime()">Suggest Time</md-buttonclass>
+        <md-button class="md-raised md-primary md-hue-3" ng-click="suggestTime()">Suggest Time</md-button>
 </div>
     <div role="tabpanel" id="tab3-content" aria-labelledby="tab3" ng-switch-when="2" md-swipe-left="next()" md-swipe-right="previous()" layout="row" layout-align="center center">
         <!--Location stuff-->
@@ -51,7 +51,7 @@
         <md-button class="md-raised md-primary md-hue-3" ng-click="suggestLocation()">Suggest Location</md-button>
 </div>
     <!--    Persistant create event button on the bottom-->
-    <md-button class="md-accent md-raised md-hue-1 text-center" ng-click="createEvent()" style="position: absolute; bottom: 0px; width: 100%;">
+    <md-button class="md-accent md-raised md-hue-1 text-center" ng-click="createEvent()" style="position: fixed; bottom: 0px; width: 100%;">
         Create Event
     </md-button>
 </ng-switch>
